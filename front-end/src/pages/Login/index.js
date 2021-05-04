@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from './loginStyled';
+import fetchLogin from '../../requests';
 
 function Login(props) {
   const [email, setEmail] = useState('');
@@ -30,11 +31,12 @@ function Login(props) {
     validatesEmail();
   };
 
-  const logged = () => {
+  const logged = async () => {
     const { history } = props;
-    const user = { email, role: 'administrator', token: 'lafaljfhqoieun' };
+    const user = await fetchLogin(email, password);
+
     localStorage.setItem('user', JSON.stringify(user));
-    if (user.role === 'administrator') history.push('/admin');
+    if (user.role === 'administrator') history.push('/admin/orders');
     if (user.role === 'client') history.push('/products');
   };
 
@@ -88,7 +90,7 @@ function Login(props) {
           data-testid="no-account-btn"
           onClick={ register }
         >
-          Ainda nao tenho conta
+          Ainda não tenho conta
         </button>
       </form>
     </Container>
