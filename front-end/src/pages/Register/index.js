@@ -52,6 +52,7 @@ function Register(props) {
     if (checkbox) role = 'administrator';
     else role = 'client';
     const user = await fetchRegister(name, email, password, role);
+    localStorage.setItem('user', JSON.stringify(user));
     if (user.role === 'admin') history.push('/admin/orders');
     if (user.role === 'client') history.push('/products');
   };
