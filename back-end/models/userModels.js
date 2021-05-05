@@ -10,7 +10,7 @@ const registerUser = async (name, email, password, role) => {
     'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?);',
     [name, email, password, role],
   );
-  return { message: 'Usuário cadastrado com sucesso' };
+  return { name, email, role };
 };
 
 const insert = async (user) => {

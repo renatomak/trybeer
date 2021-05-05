@@ -32,7 +32,20 @@ const register = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
     const newUser = await registerServices(name, email, password, role);
-    res.status(OK_200).json(newUser);
+    
+    if (newUser.message) {
+      res.status(UNAUTHORIZED_401).json(newUser);
+      return;
+    }
+    
+    const jwtConfig = {
+      expiresIn: '1h',
+      algorithm: 'HS256',
+    };
+    const token = jwt.sign({ data: email, role }, SECRET, jwtConfig);
+    const result = { name, email, role, token };
+
+    res.status(OK_200).json(result);
   } catch (err) {
     console.error(err.message);
     res.status(UNAUTHORIZED_401).send({ message: 'Incorrect username or password' });
