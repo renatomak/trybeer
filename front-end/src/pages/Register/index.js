@@ -8,6 +8,7 @@ function Register(props) {
   const [password, setPassword] = useState('');
   const [checkbox, setCheckbox] = useState(false);
   const [buttonDisabled, setbuttonDisabled] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const validateData = () => {
     const nameRegex = /^[a-z\s]+$/i;
@@ -52,6 +53,10 @@ function Register(props) {
     if (checkbox) role = 'administrator';
     else role = 'client';
     const user = await fetchRegister(name, email, password, role);
+    if (user.message) {
+      setErrorMessage(user.message);
+      return;
+    }
     localStorage.setItem('user', JSON.stringify(user));
     if (user.role === 'admin') history.push('/admin/orders');
     if (user.role === 'client') history.push('/products');
@@ -81,6 +86,7 @@ function Register(props) {
         />
         email
       </label>
+      <span>{ errorMessage }</span>
       <label htmlFor="signup-password">
         <input
           data-testid="signup-password"
