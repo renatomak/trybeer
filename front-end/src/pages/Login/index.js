@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from './loginStyled';
-import fetchLogin from '../../requests';
+import { fetchLogin } from '../../requests';
 
 function Login(props) {
   const [email, setEmail] = useState('');

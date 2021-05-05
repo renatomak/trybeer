@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { fetchRegister } from '../../requests';
 
-function Register() {
+function Register(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -8,11 +10,16 @@ function Register() {
   const [buttonDisabled, setbuttonDisabled] = useState(true);
 
   const validateData = () => {
-    const validName = name.length >= 12;
+    const nameRegex = /^[a-z\s]+$/i;
+    const minNameLength = 12;
+    const validName = name.length >= minNameLength && nameRegex.test(name);
+    console.log(`nome: ${validName}`);
     const emailRegex = /[\w.-]+@[\w-]+\.[\w-.]+/gi;
     const validEmail = emailRegex.test(email);
+    console.log(`email: ${validEmail}`);
     const sizePassword = 5;
     const validPassword = password.length >= sizePassword;
+    console.log(`password: ${validPassword}`);
 
     if (validName && validEmail && validPassword) {
       return setbuttonDisabled(false);
@@ -39,55 +46,77 @@ function Register() {
     setCheckbox(!checkbox);
   };
 
-  const handleClick = () => {
-
-  }
+  const handleClick = async () => {
+    const { history } = props;
+    let role = '';
+    if (checkbox) role = 'admin';
+    else role = 'client';
+    const user = await fetchRegister(name, email, password, role);
+    if (user.role === 'admin') history.push('/admin/orders');
+    if (user.role === 'client') history.push('/products');
+  };
 
   return (
     <form>
-      <label htmlFor="signup-name">nome</label>
-      <input
-        data-testid="signup-name"
-        type="text"
-        name="name"
-        value={ name }
-        placeholder="nome"
-        onChange={ (e) => handleChangeName(e) }
-      ></input>
-      <label htmlFor="signup-email">email</label>
-      <input
-        data-testid="signup-email"
-        type="email"
-        name="email"
-        value={ email }
-        placeholder="user@trybe.com"
-        onChange={ (e) => handleChangeEmail(e) }
-      ></input>
-      <label htmlFor="signup-password">senha</label>
-      <input
-        data-testid="signup-password"
-        type="password"
-        name="password"
-        value={ password }
-        placeholder="senha"
-        onChange={ (e) => handleChangePassword(e) }
-      ></input>
-      <label htmlFor="signup-seller">quero vender</label>
-      <input
-        data-testid="signup-seller"
-        type="checkbox"
-        name="checkbox"
-        value="quero vender"
-        onChange={ handleChangeCheckbox }
-      ></input>
+      <label htmlFor="signup-name">
+        <input
+          data-testid="signup-name"
+          type="text"
+          name="name"
+          value={ name }
+          placeholder="nome"
+          onChange={ (e) => handleChangeName(e) }
+        />
+        nome
+      </label>
+      <label htmlFor="signup-email">
+        <input
+          data-testid="signup-email"
+          type="email"
+          name="email"
+          value={ email }
+          placeholder="user@trybe.com"
+          onChange={ (e) => handleChangeEmail(e) }
+        />
+        email
+      </label>
+      <label htmlFor="signup-password">
+        <input
+          data-testid="signup-password"
+          type="password"
+          name="password"
+          value={ password }
+          placeholder="senha"
+          onChange={ (e) => handleChangePassword(e) }
+        />
+        senha
+      </label>
+      <label htmlFor="signup-seller">
+        <input
+          data-testid="signup-seller"
+          type="checkbox"
+          name="checkbox"
+          value="quero vender"
+          onChange={ handleChangeCheckbox }
+        />
+        quero vender
+      </label>
       <button
         type="button"
         data-testid="signup-btn"
         disabled={ buttonDisabled }
         onClick={ handleClick }
-      >Cadastrar</button>
+      >
+        Cadastrar
+      </button>
     </form>
-  )
-};
+  );
+}
 
 export default Register;
+
+Register.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
