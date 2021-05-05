@@ -49,7 +49,7 @@ function Register(props) {
   const handleClick = async () => {
     const { history } = props;
     let role = '';
-    if (checkbox) role = 'admin';
+    if (checkbox) role = 'administrator';
     else role = 'client';
     const user = await fetchRegister(name, email, password, role);
     if (user.role === 'admin') history.push('/admin/orders');
