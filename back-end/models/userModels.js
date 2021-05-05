@@ -5,6 +5,14 @@ const getByEmail = async (email) => {
   return user;
 };
 
+const registerUser = async (name, email, password, role) => {
+  await connection.execute(
+    'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?);',
+    [name, email, password, role],
+  );
+  return { message: 'Usuário cadastrado com sucesso' };
+};
+
 const insert = async (user) => {
   const { name, email, password, role } = user;
   await connection
@@ -27,6 +35,7 @@ const exclude = async (id) => {
 
 module.exports = {
   getByEmail,
+  registerUser,
   insert,
   update,
   exclude,
