@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from './loginStyled';
-import fetchLogin from '../../requests';
+import { fetchLogin } from '../../requests';
 
 function Login(props) {
   const [email, setEmail] = useState('');
@@ -9,7 +9,7 @@ function Login(props) {
   const [buttonDisabled, setbuttonDisabled] = useState(true);
 
   const validatesEmail = () => {
-    const emailRegex = /[\w.-]+@[\w-]+\.[\w-.]+/gi;
+    const emailRegex = /\S+@\S+\.\S+/;
     const validEmail = emailRegex.test(email);
     const sizePassword = 5;
     const validPassword = password.length >= sizePassword;
