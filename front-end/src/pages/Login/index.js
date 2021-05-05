@@ -9,7 +9,7 @@ function Login(props) {
   const [buttonDisabled, setbuttonDisabled] = useState(true);
 
   const validatesEmail = () => {
-    const emailRegex = /[\w.-]+@[\w-]+\.[\w-.]+/gi;
+    const emailRegex = /\S+@\S+\.\S+/;
     const validEmail = emailRegex.test(email);
     const sizePassword = 5;
     const validPassword = password.length >= sizePassword;

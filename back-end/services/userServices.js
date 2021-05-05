@@ -37,7 +37,7 @@ const registerServices = async (name, email, password, role) => {
     const newUser = await registerUser(name, email, password, role);
     return newUser;
   }
-  return user ? { message: 'Já existe um usuário com esse e-mail' }
+  return user ? { message: 'Já existe um usuário com esse e-mail.' }
     : { message: 'Dados inválidos' };
 };
 

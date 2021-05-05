@@ -11,16 +11,13 @@ function Register(props) {
   const [errorMessage, setErrorMessage] = useState('');
 
   const validateData = () => {
-    const nameRegex = /^[a-z\s]+$/i;
+    const nameRegex =  /^[a-zA-Z\s]*$/;
     const minNameLength = 12;
     const validName = name.length >= minNameLength && nameRegex.test(name);
-    console.log(`nome: ${validName}`);
-    const emailRegex = /[\w.-]+@[\w-]+\.[\w-.]+/gi;
+    const emailRegex = /\S+@\S+\.\S+/;
     const validEmail = emailRegex.test(email);
-    console.log(`email: ${validEmail}`);
     const sizePassword = 5;
     const validPassword = password.length >= sizePassword;
-    console.log(`password: ${validPassword}`);
 
     if (validName && validEmail && validPassword) {
       return setbuttonDisabled(false);
@@ -58,7 +55,7 @@ function Register(props) {
       return;
     }
     localStorage.setItem('user', JSON.stringify(user));
-    if (user.role === 'admin') history.push('/admin/orders');
+    if (user.role === 'administrator') history.push('/admin/orders');
     if (user.role === 'client') history.push('/products');
   };
 
@@ -73,7 +70,7 @@ function Register(props) {
           placeholder="nome"
           onChange={ (e) => handleChangeName(e) }
         />
-        nome
+        Nome
       </label>
       <label htmlFor="signup-email">
         <input
@@ -84,7 +81,7 @@ function Register(props) {
           placeholder="user@trybe.com"
           onChange={ (e) => handleChangeEmail(e) }
         />
-        email
+        Email
       </label>
       <span>{ errorMessage }</span>
       <label htmlFor="signup-password">
@@ -96,7 +93,7 @@ function Register(props) {
           placeholder="senha"
           onChange={ (e) => handleChangePassword(e) }
         />
-        senha
+        Senha
       </label>
       <label htmlFor="signup-seller">
         <input
@@ -106,7 +103,7 @@ function Register(props) {
           value="quero vender"
           onChange={ handleChangeCheckbox }
         />
-        quero vender
+        Quero vender
       </label>
       <button
         type="button"
