@@ -1,20 +1,25 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Products from './pages/Products';
-import Register from './pages/Register';
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import SideBar from './pages/components/SideBar';
+import Routes from './router';
+/** FONTE: https://gist.github.com/Rajdeepc/aca3300d602b96eced3d76f60cef5e99#file-showhidenav_reactrouter-js */
+const App = ({ location }) => (
+  <div>
+    {location.pathname !== '/login' && location.pathname !== '/' && <SideBar />}
+    <Routes />
+  </div>
+);
 
-function App() {
-  return (
-    <Switch>
-      <Route exact path="/" component={ Login } />
-      <Route path="/login" component={ Login } />
-      <Route path="/admin/orders" component={ Home } />
-      <Route path="/products" component={ Products } />
-      <Route path="/register" component={ Register } />
-    </Switch>
-  );
-}
+App.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }),
+};
 
-export default App;
+App.defaultProps = {
+  location: {
+    pathname: '',
+  },
+};
+export default withRouter(App);
