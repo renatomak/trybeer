@@ -11,7 +11,7 @@ function Register(props) {
   const [errorMessage, setErrorMessage] = useState('');
 
   const validateData = () => {
-    const nameRegex =  /^[a-zA-Z\s]*$/;
+    const nameRegex = /^[a-zA-Z\s]*$/;
     const minNameLength = 12;
     const validName = name.length >= minNameLength && nameRegex.test(name);
     const emailRegex = /\S+@\S+\.\S+/;
