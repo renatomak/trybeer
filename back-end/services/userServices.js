@@ -1,5 +1,5 @@
 const { checkedEmail, checkedPassword, checkedName, checkedRole } = require('../util');
-const { getByEmail, registerUser } = require('../models/userModels');
+const { getByEmail, registerUser, profileUser } = require('../models/userModels');
 
 // const checkedPassword = (password) => {
 //   if (password.length < SIZE_PASSWORD) {
@@ -41,7 +41,18 @@ const registerServices = async (name, email, password, role) => {
     : { message: 'Dados inválidos' };
 };
 
+const profileServices = async (name, email) => {
+  const user = await checkUserExists(email);
+  if (checkedEmail(email) && checkedName(name) && user) {
+    await profileUser(name, email);
+    return { message: 'Atualização concluída com sucesso na tela' };
+  }
+  return !user ? { message: 'Não existe um usuário com esse e-mail.' }
+  : { message: 'Dados inválidos' };
+};
+
 module.exports = {
   loginServices,
   registerServices,
+  profileServices,
 };

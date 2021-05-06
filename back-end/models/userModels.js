@@ -13,11 +13,8 @@ const registerUser = async (name, email, password, role) => {
   return { name, email, role };
 };
 
-const insert = async (user) => {
-  const { name, email, password, role } = user;
-  await connection
-  .execute('INSERT INTO users (name, email, password, role) VALUE (? ? ? ?)',
-  [name, email, password, role]);
+const profileUser = async (name, email) => {
+  await connection.execute('UPDATE users SET name=? WHERE email=?', [name, email]);
 };
 
 const update = async (user) => {
@@ -36,7 +33,7 @@ const exclude = async (id) => {
 module.exports = {
   getByEmail,
   registerUser,
-  insert,
+  profileUser,
   update,
   exclude,
 };

@@ -1,6 +1,6 @@
 const rescue = require('express-rescue');
 const jwt = require('jsonwebtoken');
-const { loginServices, registerServices } = require('../services/userServices');
+const { loginServices, registerServices, profileServices } = require('../services/userServices');
 
 const {
   OK_200,
@@ -48,11 +48,23 @@ const register = async (req, res) => {
     res.status(OK_200).json(result);
   } catch (err) {
     console.error(err.message);
-    res.status(UNAUTHORIZED_401).send({ message: 'Incorrect username or password' });
+    res.status(UNAUTHORIZED_401).send({ message: 'Internal Error' });
+  }
+};
+
+const profile = async (req, res) => {
+  try {
+    const { name, email } = req.body;
+    const updatedUser = await profileServices(name, email);
+    res.status(OK_200).json(updatedUser);
+  } catch (err) {
+    console.error(err.message);
+    res.status(UNAUTHORIZED_401).send({ message: 'Internal Error' });    
   }
 };
 
 module.exports = {
   login,
   register,
+  profile,
 };
