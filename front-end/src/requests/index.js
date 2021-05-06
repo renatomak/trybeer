@@ -1,3 +1,5 @@
+const headers = { 'Content-type': 'application/json' };
+
 const fetchLogin = (email, password) => {
   const endpoint = 'http://localhost:3001/login';
   const user = { email, password };
@@ -5,7 +7,7 @@ const fetchLogin = (email, password) => {
     endpoint,
     {
       method: 'POST',
-      headers: { 'Content-type': 'application/json' },
+      headers,
       body: JSON.stringify(user),
     },
   )
@@ -20,7 +22,22 @@ const fetchRegister = (name, email, password, role) => {
     endpoint,
     {
       method: 'POST',
-      headers: { 'Content-type': 'application/json' },
+      headers,
+      body: JSON.stringify(user),
+    },
+  )
+    .then((response) => response.json())
+    .then((data) => data);
+};
+
+const fetchUser = (name, email) => {
+  const endpoint = 'http://localhost:3001/profile';
+  const user = { name, email };
+  return fetch(
+    endpoint,
+    {
+      method: 'POST',
+      headers,
       body: JSON.stringify(user),
     },
   )
@@ -31,4 +48,5 @@ const fetchRegister = (name, email, password, role) => {
 export {
   fetchLogin,
   fetchRegister,
+  fetchUser,
 };
