@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const { productsServices } = require('../services/productsServices');
 
 const {
@@ -14,6 +16,13 @@ const {
     }
   };
 
+  const images = async (req, res) => {
+    const { imageName } = req.params;
+    const image = fs.createReadStream(path.join(__dirname, `../images/${imageName}`));
+    res.status(OK_200).sendFile(image.path); 
+  };
+
   module.exports = {
     products,
+    images,
   };
