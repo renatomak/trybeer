@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './styles.css';
 
-const SideBar = () => {
+const SideBar = ({ title }) => {
   const SIDE_MENU = 'side-menu-container';
 
   const [isActive, setIsActive] = useState(false);
@@ -25,7 +26,7 @@ const SideBar = () => {
   return (
     <div>
       <header>
-        <h1 data-testid="top-title">TryBeer</h1>
+        <h1 data-testid="top-title">{title}</h1>
         <button
           type="button"
           className="btn containerHamburguer"
@@ -70,5 +71,9 @@ const SideBar = () => {
     </div>
   );
 };
+
+SideBar.propTypes = {
+  title: PropTypes.string,
+}.isRequired;
 
 export default SideBar;

@@ -38,7 +38,7 @@ function Register(props) {
   const handleChangePassword = ({ target: { value } }) => {
     setPassword(value);
     validateData();
-  };text
+  };
 
   const handleChangeCheckbox = () => {
     setCheckbox(!checkbox);

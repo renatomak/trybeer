@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { fetchUser } from '../../requests';
+import SideBar from '../components/SideBar';
 
 function Profile(props) {
   const [name, setName] = useState('');
@@ -39,44 +40,48 @@ function Profile(props) {
 
   const handleClick = async () => {
     const returnedMessage = await fetchUser(name, email);
+    console.log(returnedMessage);
     const user = JSON.parse(localStorage.getItem('user'));
     user.name = name;
     localStorage.setItem('user', JSON.stringify(user));
-    setMessage(returnedMessage);
+    setMessage(returnedMessage.message);
   };
 
   return (
-    <form>
-      <label htmlFor="signup-name">
-        <input
-          data-testid="signup-name"
-          type="text"
-          name="name"
-          value={ name }
-          onChange={ (e) => handleChangeName(e) }
-        />
-        Nome
-      </label>
-      <label htmlFor="signup-email">
-        <input
-          data-testid="signup-email"
-          type="email"
-          name="email"
-          value={ email }
-          readOnly
-        />
-        Email
-      </label>
-      <button
-        type="button"
-        data-testid="signup-btn"
-        disabled={ buttonDisabled }
-        onClick={ handleClick }
-      >
-        Salvar
-      </button>
-      <span>{ message }</span>
-    </form>
+    <div>
+      <SideBar title="Meu perfil" />
+      <form>
+        <label htmlFor="profile-name-input">
+          <input
+            data-testid="profile-name-input"
+            type="text"
+            name="name"
+            value={ name }
+            onChange={ (e) => handleChangeName(e) }
+          />
+          Nome
+        </label>
+        <label htmlFor="profile-email-input">
+          <input
+            data-testid="profile-email-input"
+            type="email"
+            name="email"
+            value={ email }
+            readOnly
+          />
+          Email
+        </label>
+        <button
+          type="button"
+          data-testid="profile-save-btn"
+          disabled={ buttonDisabled }
+          onClick={ handleClick }
+        >
+          Salvar
+        </button>
+        <span>{ message }</span>
+      </form>
+    </div>
   );
 }
 
