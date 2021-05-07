@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Products from './pages/Products';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
+import Checkout from './pages/Client/Checkout';
 import AdminProfile from './pages/AdminProfile';
 import Checkout from './pages/Checkout';
 
@@ -18,6 +19,7 @@ const Routes = () => (
       <Route path="/products" component={ Products } />
       <Route path="/register" component={ Register } />
       <Route path="/profile" component={ Profile } />
+      <Route exact path="/checkout" component={ Checkout } />
       <Route exact path="/admin/profile" component={ AdminProfile } />
       <Route path="/checkout" component={ Checkout } />
     </Switch>
