@@ -53,15 +53,15 @@ function fetchGetProducts() {
     .catch((err) => console.log(err.message));
 }
 
-function fetchCheckout(email, totalPrice, deliveryAddress, deliveryNumber, itens) {
+function fetchCheckout({ email, totalPrice, deliveryAddress, deliveryNumber, itens }) {
   const endpoint = 'http://localhost:3001/checkout';
-  const data = { email, totalPrice, deliveryAddress, deliveryNumber, itens };
+  const checkoutData = { email, totalPrice, deliveryAddress, deliveryNumber, itens };
   return fetch(
     endpoint,
     {
       method: 'POST',
       headers,
-      body: JSON.stringify(data),
+      body: JSON.stringify(checkoutData),
     },
   )
     .then((response) => response.json())
