@@ -9,11 +9,18 @@ const Products = (props) => {
   const { salesProducts, totalPriceSales } = useContext(TrybeerContext);
   const { history } = props;
   const totalPrice = String(totalPriceSales.toFixed(2)).replace('.', ',');
-  console.log(typeof totalPrice);
 
   const redirect = () => {
     history.push('/checkout');
   };
+
+  const userLogged = () => {
+    const user = localStorage.getItem('user');
+    if (!user) {
+      return history.push('/login');
+    }
+  };
+  userLogged();
 
   return (
     <div>

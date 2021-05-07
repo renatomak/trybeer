@@ -6,6 +6,7 @@ import { fetchGetProducts } from '../../requests';
 function TrybeerProvider({ children }) {
   const [salesProducts, setSalesProducts] = useState([]);
   const [totalPriceSales, setTotalPriceSales] = useState(0);
+  const [loggedInUser, setLoggedInUser] = useState(false);
 
   useEffect(() => {
     fetchGetProducts()
@@ -27,7 +28,9 @@ function TrybeerProvider({ children }) {
   const context = {
     salesProducts,
     totalPriceSales,
-    setTotalPriceSales };
+    setTotalPriceSales,
+    loggedInUser,
+    setLoggedInUser };
 
   return (
     <TrybeerContext.Provider value={ context }>
