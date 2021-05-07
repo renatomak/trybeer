@@ -8,3 +8,20 @@ const getProducts = async () => {
 module.exports = {
   getProducts,
 };
+
+// {
+//   email,
+//   total_Price,
+//   deliveryAddress,
+//   delivery_Number,
+//   itens: [
+//     {
+//       product_Id,
+//       quantity,
+//     },
+//     {
+//       product_Id,
+//       quantity,
+//     }
+//   ]
+// }

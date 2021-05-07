@@ -22,7 +22,13 @@ const {
     res.status(OK_200).sendFile(image.path); 
   };
 
+  const checkout = async (req, res) => {
+    const pedido = req.body;
+    res.status(OK_200).json({ message: 'Sucesso no controller', pedido });
+  };
+
   module.exports = {
     products,
     images,
+    checkout,
   };
