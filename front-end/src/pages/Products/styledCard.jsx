@@ -21,7 +21,7 @@ export const CardImg = styled.div`
   align-items: center;
 
   img {
-  width: 40%;
+  width: 70%;
   height: 80%;
 }
 `;
@@ -41,7 +41,7 @@ export const BtnContainer = styled.div`
     outline: none;
     box-shadow: none;
   }
-  input {
+  input, span {
     width: 50px;
     text-align: center;
     border: none;

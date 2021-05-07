@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Products from './pages/Products';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
+import Checkout from './pages/Client/Checkout';
 
 const Routes = () => (
   <main>
@@ -16,6 +17,7 @@ const Routes = () => (
       <Route path="/products" component={ Products } />
       <Route path="/register" component={ Register } />
       <Route path="/profile" component={ Profile } />
+      <Route exact path="/checkout" component={ Checkout } />
     </Switch>
   </main>
 );

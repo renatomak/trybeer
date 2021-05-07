@@ -1,31 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import TrybeerContext from './TrybeerContext';
+import { fetchGetProducts } from '../../requests';
 
 function TrybeerProvider({ children }) {
-  const [salesProducts, setSalesProducts] = useState('');
+  const [salesProducts, setSalesProducts] = useState([]);
+  const [totalPriceSales, setTotalPriceSales] = useState(0);
 
-  function fetchGetAllSalesProducts() {
-    const endpoint = `${process.env.REACT_APP_ENDPOINT}login`;
-    console.log(endpoint);
+  useEffect(() => {
+    fetchGetProducts()
+      .then((result) => {
+        setSalesProducts(result);
+      });
 
-    return fetch(
-      endpoint,
-      {
-        method: 'GET',
-        headers: { 'Content-type': 'application/json' },
-      },
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setSalesProducts(data);
-      })
-      .catch((err) => console.log(err.message));
-  }
+    if (localStorage.getItem('totalPriceSales')) {
+      setTotalPriceSales(
+        JSON.parse(localStorage.getItem('totalPriceSales')),
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('totalPriceSales', JSON.stringify(totalPriceSales) || 0);
+  }, [totalPriceSales]);
 
   const context = {
-    fetchGetAllSalesProducts,
-    salesProducts };
+    salesProducts,
+    totalPriceSales,
+    setTotalPriceSales };
 
   return (
     <TrybeerContext.Provider value={ context }>

@@ -1,26 +1,53 @@
+import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { Container } from './styled';
 import { TrybeerContext } from '../../util';
-import data from './data';
 import Card from './Card';
+import SideBar from '../components/SideBar';
 
-export default () => {
-  const { salesProducts } = useContext(TrybeerContext);
+const Products = (props) => {
+  const { salesProducts, totalPriceSales } = useContext(TrybeerContext);
+  const { history } = props;
+  const totalPrice = String(totalPriceSales.toFixed(2)).replace('.', ',');
+  console.log(typeof totalPrice);
+
+  const redirect = () => {
+    history.push('/checkout');
+  };
 
   return (
     <div>
+      <SideBar title="TryBeer" />
       <Container>
-        {data.map((product, index) => <Card product={ product } key={ index } />)}
+        {salesProducts
+          .map((product, index) => (<Card
+            product={ product }
+            key={ index }
+            index={ index }
+          />))}
       </Container>
-      <button
-        type="button"
-        data-testid="checkout-bottom-btn"
-      >
-        Ver carrinho
+      <div>
+        <button
+          type="button"
+          data-testid="checkout-bottom-btn"
+          value="Ver carrinho"
+          onClick={ redirect }
+          disabled={ totalPrice === '0,00' }
+        >
+          Ver Carrinho
+        </button>
         <span data-testid="checkout-bottom-btn-value">
-          {`R$  ${salesProducts} `}
+          {` R$  ${String(totalPriceSales.toFixed(2)).replace('.', ',')} `}
         </span>
-      </button>
+      </div>
     </div>
   );
 };
+
+Products.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
+
+export default Products;
