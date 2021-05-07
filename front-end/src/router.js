@@ -8,7 +8,6 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Checkout from './pages/Client/Checkout';
 import AdminProfile from './pages/AdminProfile';
-import Checkout from './pages/Checkout';
 
 const Routes = () => (
   <main>

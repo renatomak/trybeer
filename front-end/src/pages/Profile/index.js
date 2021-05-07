@@ -13,7 +13,6 @@ function Profile(props) {
     const { history } = props;
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user) history.push('/login');
-    console.log(user.name);
     setName(user.name);
     setEmail(user.email);
   };
