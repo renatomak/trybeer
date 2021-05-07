@@ -53,9 +53,25 @@ function fetchGetProducts() {
     .catch((err) => console.log(err.message));
 }
 
+function fetchCheckout(email, totalPrice, deliveryAddress, deliveryNumber, itens) {
+  const endpoint = 'http://localhost:3001/checkout';
+  const data = { email, totalPrice, deliveryAddress, deliveryNumber, itens };
+  return fetch(
+    endpoint,
+    {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(data),
+    },
+  )
+    .then((response) => response.json())
+    .then((data) => data);
+}
+
 export {
   fetchLogin,
   fetchRegister,
   fetchUser,
   fetchGetProducts,
+  fetchCheckout,
 };

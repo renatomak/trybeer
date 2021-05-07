@@ -1,41 +1,61 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { fetchCheckout } from '../../../requests';
+import SideBar from '../../components/SideBar';
 
-function Checkout() {
+function Checkout(props) {
+  const [email, setEmail] = useState('');
   const [buttonDisabled, setbuttonDisabled] = useState(true);
-  const [street, setStreet] = useState(true);
-  const [houseNumber, setHouseNumber] = useState(true);
-  const [total, setTotal] = useState(true);
-
+  const [deliveryAddress, setdeliveryAddress] = useState('');
+  const [deliveryNumber, setdeliveryNumber] = useState('');
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [itens, setItens] = useState([]);
+  const [message, setMessage] = useState('');
 
   const getProfile = async () => {
     const { history } = props;
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user) history.push('/login');
+    else {
+      setEmail(user.email);
+    }
   };
 
   useEffect(() => {
     getProfile();
   }, []);
 
-  const handleTotal = () => {
-
+  const handleTotal = ({ target: { value } }) => {
+    setTotalPrice(value);
+    validateInformation();
   }
 
   const handleStreet = ({ target: { value } }) => {
-    setStreet(value);
+    setdeliveryAddress(value);
     validateInformation();
   }
 
   const handleHouseNumber = ({ target: { value } }) => {
-
+    setdeliveryNumber(value);
+    validateInformation();
   }
 
   const validateInformation = () => {
-    
+    if (deliveryAddress && deliveryNumber && totalPrice >= 0) setbuttonDisabled(false);
+    else setbuttonDisabled(true);
   }
 
-  const handleClick = () => {
+  const deleteMessage = () => {
+    setMessage('');
+  }
 
+  const handleClick = async () => {
+    const requestReturn = await fetchCheckout(email, totalPrice, deliveryAddress, deliveryNumber, itens);
+    if (requestReturn.message === "Compra realizada com sucesso!") {
+      setMessage("Compra realizada com sucesso!");
+      setTimeout(deleteMessage(), 2000);
+      //esvaziar carrinho
+    } else setMessage(requestReturn.message);
   }
 
   return (
@@ -53,15 +73,16 @@ function Checkout() {
       </ul>
       <span
         data-testid="order-total-value"
+        value={ totalPrice }
         onChange={ handleTotal }
-      >Total: R$0,00</span>
+      >Total: R${ totalPrice }</span>
       <form>
         <label htmlFor="checkout-street-input">
           Rua:
           <input
             type="text"
             data-testid="checkout-street-input"
-            value={ street }
+            value={ deliveryAddress }
             onChange={ handleStreet }
           ></input>
         </label>
@@ -70,7 +91,7 @@ function Checkout() {
           <input
             type="text"
             data-testid="checkout-house-number-input"
-            value={ houseNumber }
+            value={ deliveryNumber }
             onChange={ handleHouseNumber }
           ></input>
         </label>
@@ -82,13 +103,14 @@ function Checkout() {
         >Finalizar pedido
         </button>
       </form>
+      <span>{ message }</span>
     </div>
   );
 }
 
 export default Checkout;
 
-Profile.propTypes = {
+Checkout.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
