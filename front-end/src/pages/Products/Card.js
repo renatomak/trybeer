@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState, useContext } from 'react';
-import { IoIosRemove, IoIosAdd } from 'react-icons/io';
+/* import { IoIosRemove, IoIosAdd } from 'react-icons/io'; */
 import { TrybeerContext } from '../../util';
 import { CardContainer, Price, CardImg, BtnContainer } from './styledCard';
 
@@ -39,7 +39,8 @@ const Card = (props) => {
           name="minus"
           onClick={ () => hadleChange('minus') }
         >
-          <IoIosRemove />
+          -
+          {/* <IoIosRemove /> */}
         </button>
         <span data-testid={ `${index}-product-qtd` }>
           { qtdProduct }
@@ -51,7 +52,8 @@ const Card = (props) => {
           name="plus"
           onClick={ () => hadleChange('plus') }
         >
-          <IoIosAdd />
+          +
+          {/* <IoIosAdd /> */}
         </button>
       </BtnContainer>
     </CardContainer>
