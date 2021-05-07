@@ -12,6 +12,20 @@ function Checkout(props) {
   const [itens, setItens] = useState([]);
   const [message, setMessage] = useState('');
 
+  const cart = localStorage.getItem('cart');
+
+  const getTotalPrice = () => {
+    let price = 0;
+    cart.forEach((item) => {
+      price = price + (item.quantity * item.price);
+    });
+    setTotalPrice(price);
+  }
+
+  useEffect(() => {
+    getTotalPrice();
+  }, []);
+
   const getProfile = async () => {
     const { history } = props;
     const user = JSON.parse(localStorage.getItem('user'));
@@ -49,7 +63,7 @@ function Checkout(props) {
     setMessage('');
   };
 
-  const handleClick = async () => {
+  const handleCheckout = async () => {
     const requestReturn = await fetchCheckout(
       { email, totalPrice, deliveryAddress, deliveryNumber, itens },
     );
@@ -61,23 +75,31 @@ function Checkout(props) {
     } else setMessage(requestReturn.message);
   };
 
+  const handleDelete = () => {
+
+  }
+
   return (
     <div>
       <SideBar title="Finalizar Pedido" />
-      //Fazer um map aqui pra criar um li pra cada produto do carrinho
       <ul>
-        <li>
-          <span data-testid="0-product-qtd-input">quantidade do produto</span>
-          <span data-testid="0-product-name">nome do produto</span>
-          <span data-testid="0-product-total-value">valor total do produto</span>
-          <span data-testid="0-product-unit-price">valor unitário do produto</span>
-          <button
-            type="button"
-            data-testid="0-removal-button"
-          >
-            botão de excluir produto do carrinho
-          </button>
-        </li>
+        {cart.map((item, index) => {
+          return (
+            <li>
+              <span data-testid={ `${index}-product-qtd-input` }>{item.quantity}</span>
+              <span data-testid={ `${index}-product-name` }>{item.name}</span>
+              <span data-testid={ `${index}-product-total-value` }>{(item.price * item.quantity)}</span>
+              <span data-testid={ `${index}-product-unit-price` }>{item.price}</span>
+              <button
+                type="button"
+                data-testid={ `${index}-removal-button` }
+                onClick={ handleDelete }
+              >
+                X
+              </button>
+            </li>
+          )
+        })}
       </ul>
       <span
         data-testid="order-total-value"
@@ -110,7 +132,7 @@ function Checkout(props) {
           type="button"
           data-testid="checkout-finish-btn"
           disabled={ buttonDisabled }
-          onClick={ handleClick }
+          onClick={ handleCheckout }
         >
           Finalizar pedido
         </button>
