@@ -45,8 +45,17 @@ const fetchUser = (name, email) => {
     .then((data) => data);
 };
 
+function fetchGetProducts() {
+  const endpoint = 'http://localhost:3001/products';
+  return fetch(endpoint)
+    .then((response) => response.json())
+    .then((data) => data)
+    .catch((err) => console.log(err.message));
+}
+
 export {
   fetchLogin,
   fetchRegister,
   fetchUser,
+  fetchGetProducts,
 };
