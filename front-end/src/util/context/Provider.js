@@ -5,7 +5,6 @@ import TrybeerContext from './TrybeerContext';
 function TrybeerProvider({ children }) {
   const getCart = JSON.parse(localStorage.getItem('cart'));
   const [products, setProducts] = useState(getCart);
-  const [forSales, setForSales] = useState([]);
   const [shopCart, setShopCart] = useState([]);
   const [amount, setAmount] = useState(0);
   const [loggedInUser, setLoggedInUser] = useState(false);
@@ -16,6 +15,9 @@ function TrybeerProvider({ children }) {
         .reduce((acc, { quantity, price }) => acc + (quantity * price), 0);
       setAmount(total);
 
+      const cart = products.filter(({ quantity }) => quantity > 0);
+      setShopCart(cart);
+      console.log(cart);
       localStorage.setItem('amount', JSON.stringify(total));
       localStorage.setItem('cart', JSON.stringify(products));
     }
@@ -29,8 +31,6 @@ function TrybeerProvider({ children }) {
     setLoggedInUser,
     shopCart,
     setShopCart,
-    forSales,
-    setForSales,
     setProducts };
 
   return (
