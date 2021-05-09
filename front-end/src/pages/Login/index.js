@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from './loginStyled';
-import { fetchLogin } from '../../requests';
+import { fetchLogin, fetchGetProducts } from '../../requests';
+import { TrybeerContext } from '../../util';
 
 function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [buttonDisabled, setbuttonDisabled] = useState(true);
+  const { setProducts } = useContext(TrybeerContext);
 
   const validatesEmail = () => {
     const emailRegex = /\S+@\S+\.\S+/;
@@ -34,8 +36,18 @@ function Login(props) {
   const logged = async () => {
     const { history } = props;
     const user = await fetchLogin(email, password);
+    const LocalProducts = await fetchGetProducts().then((itens) => (
+      itens.map((item) => {
+        const newItem = { ...item, quantity: 0 };
+        return newItem;
+      })
+    ));
+    setProducts(LocalProducts);
+    console.log(LocalProducts);
 
     localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('cart', JSON.stringify(LocalProducts));
+
     if (user.role === 'administrator') history.push('/admin/orders');
     if (user.role === 'client') history.push('/products');
   };
