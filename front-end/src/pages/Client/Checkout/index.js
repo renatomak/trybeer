@@ -37,7 +37,7 @@ function Checkout(props) {
 
   useEffect(() => {
     getProfile();
-  }, [getProfile]);
+  }, []);
 
   const buttonDisabled = deliveryAddress === ''
     || deliveryNumber === '' || totalPrice === 0;
@@ -78,9 +78,10 @@ function Checkout(props) {
   return (
     <div>
       <SideBar title="Finalizar Pedido" />
-      {(itens.length === 0) ? <span>Não há produtos no carrinho</span> : <ul>
-        {itens.map((item, index) => (
-          <li key={ index }>
+      {(itens.length === 0)
+        ? (<span>Não há produtos no carrinho</span>)
+        : itens.map((item, index) => (
+          <p key={ index }>
             <span data-testid={ `${index}-product-qtd-input` }>{item.quantity}</span>
             <br />
             <span data-testid={ `${index}-product-name` }>{item.name}</span>
@@ -105,9 +106,8 @@ function Checkout(props) {
             >
               X
             </button>
-          </li>
+          </p>
         ))}
-      </ul>}
       <span
         data-testid="order-total-value"
       >
