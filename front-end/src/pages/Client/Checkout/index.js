@@ -5,14 +5,11 @@ import SideBar from '../../components/SideBar';
 
 function Checkout(props) {
   const [email, setEmail] = useState('');
-  // const [buttonDisabled, setbuttonDisabled] = useState(true);
   const [deliveryAddress, setdeliveryAddress] = useState('');
   const [deliveryNumber, setdeliveryNumber] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
   const [itens, setItens] = useState([]);
   const [message, setMessage] = useState('');
-
-  const { history } = props;
 
   const getTotalPrice = () => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -23,7 +20,6 @@ function Checkout(props) {
     });
     setTotalPrice(price);
     setItens(cart);
-    // validateInformation();
   }
 
   useEffect(() => {
@@ -45,36 +41,30 @@ function Checkout(props) {
 
   const buttonDisabled = deliveryAddress === '' || deliveryNumber === '' || totalPrice === 0;
 
-  // const validateInformation = () => {
-  //   if (deliveryAddress && deliveryNumber && totalPrice >= 0) setbuttonDisabled(false);
-  //   else setbuttonDisabled(true);
-  // };
-
   const handleStreet = ({ target: { value } }) => {
     setdeliveryAddress(value);
-    // validateInformation();
   };
 
   const handleHouseNumber = ({ target: { value } }) => {
     setdeliveryNumber(value);
-    // validateInformation();
   };
 
   const deleteMessage = () => {
+    const { history } = props;
     setMessage('');
+    localStorage.setItem('cart', '');
+    history.push('/products')
   };
 
   const handleCheckout = async () => {
-    console.log(email, totalPrice, deliveryAddress, deliveryNumber, itens )
     const requestReturn = await fetchCheckout(
       { email, totalPrice, deliveryAddress, deliveryNumber, itens },
     );
+    console.log(requestReturn);
     const timeout = 2000;
     if (requestReturn.message === 'Compra realizada com sucesso!') {
       setMessage('Compra realizada com sucesso!');
       setTimeout(deleteMessage, timeout);
-      localStorage.setItem('cart', '');
-      history.push('/products')
     } else setMessage(requestReturn.message);
   };
 

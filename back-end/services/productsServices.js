@@ -4,13 +4,13 @@ const { getByEmail } = require('../models/userModels');
 
 const productsServices = async () => {
   const products = await getProducts();
-  return products;  
+  return products;
 };
 
 const saleProd = async (saleId, itens) => {
   itens.forEach(async (item) => {
-    const { productId, quantity } = item;
-    await addSaleProd(saleId, productId, quantity);
+    const { id, quantity } = item;
+    await addSaleProd(saleId, id, quantity);
   });
   return { message: 'Compra realizada com sucesso!' };
 };
