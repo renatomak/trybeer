@@ -1,6 +1,10 @@
 const fs = require('fs');
 const path = require('path');
-const { productsServices, checkoutServices } = require('../services/productsServices');
+const {
+  productsServices,
+  checkoutServices,
+  ordersServices,
+} = require('../services/productsServices');
 
 const {
   OK_200,
@@ -40,8 +44,20 @@ const {
     }
   };
 
+  const orders = async (req, res) => {
+    try {
+      const { email } = req.body;
+      const pedidos = await ordersServices(email);      
+      res.status(OK_200).json(pedidos);
+    } catch (err) {
+      console.error(err.message);
+      res.status(UNAUTHORIZED_401).send({ message: internalError });    
+    }
+  };
+
   module.exports = {
     products,
     images,
     checkout,
+    orders,
   };
