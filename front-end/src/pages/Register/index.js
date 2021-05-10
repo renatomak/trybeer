@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { fetchRegister } from '../../requests';
+import { TrybeerContext } from '../../util';
+import { fetchRegister, fetchGetProducts } from '../../requests';
 
 function Register(props) {
   const [name, setName] = useState('');
@@ -9,6 +10,8 @@ function Register(props) {
   const [checkbox, setCheckbox] = useState(false);
   const [buttonDisabled, setbuttonDisabled] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const { setProducts } = useContext(TrybeerContext);
 
   const validateData = () => {
     const nameRegex = /^[a-zA-Z\s]*$/;
@@ -54,6 +57,15 @@ function Register(props) {
       setErrorMessage(user.message);
       return;
     }
+    const LocalProducts = await fetchGetProducts().then((itens) => (
+      itens.map((item) => {
+        const newItem = { ...item, quantity: 0 };
+        return newItem;
+      })
+    ));
+    setProducts(LocalProducts);
+
+    localStorage.setItem('cart', JSON.stringify(LocalProducts));
     localStorage.setItem('user', JSON.stringify(user));
     if (user.role === 'administrator') history.push('/admin/orders');
     if (user.role === 'client') history.push('/products');

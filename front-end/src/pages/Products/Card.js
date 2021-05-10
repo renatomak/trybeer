@@ -1,26 +1,29 @@
 import PropTypes from 'prop-types';
-import React, { useState, useContext } from 'react';
-/* import { IoIosRemove, IoIosAdd } from 'react-icons/io'; */
+import React, { useState, useContext, useEffect } from 'react';
 import { TrybeerContext } from '../../util';
 import { CardContainer, Price, CardImg, BtnContainer } from './styledCard';
 
 const Card = (props) => {
-  const { totalPriceSales, setTotalPriceSales } = useContext(TrybeerContext);
-  const [qtdProduct, setQtdProduct] = useState(0);
+  const { setProducts, products } = useContext(TrybeerContext);
+  const { product: { name, price, quantity }, index } = props;
 
-  const { product, index } = props;
-  const { name, price } = product;
+  const [qtdProduct, setQtdProduct] = useState(quantity);
 
   const hadleChange = (type) => {
     if (type === 'plus') {
       setQtdProduct(qtdProduct + 1);
-      setTotalPriceSales(parseFloat(totalPriceSales) + parseFloat(price));
     }
+
     if (type === 'minus' && qtdProduct > 0) {
       setQtdProduct(qtdProduct - 1);
-      setTotalPriceSales(parseFloat(totalPriceSales) - parseFloat(price));
     }
   };
+
+  useEffect(() => {
+    const cart = [...products];
+    cart[index].quantity = qtdProduct;
+    setProducts(cart);
+  }, [qtdProduct]);
 
   return (
     <CardContainer>
@@ -40,10 +43,9 @@ const Card = (props) => {
           onClick={ () => hadleChange('minus') }
         >
           -
-          {/* <IoIosRemove /> */}
         </button>
         <span data-testid={ `${index}-product-qtd` }>
-          { qtdProduct }
+          { quantity }
         </span>
         <button
           type="button"
@@ -53,7 +55,6 @@ const Card = (props) => {
           onClick={ () => hadleChange('plus') }
         >
           +
-          {/* <IoIosAdd /> */}
         </button>
       </BtnContainer>
     </CardContainer>
@@ -63,7 +64,8 @@ const Card = (props) => {
 Card.propTypes = {
   index: PropTypes.string.isRequired,
   product: PropTypes.shape({
-    image: PropTypes.any,
+    id: PropTypes.any,
+    quantity: PropTypes.any,
     name: PropTypes.any,
     price: PropTypes.any,
   }).isRequired,

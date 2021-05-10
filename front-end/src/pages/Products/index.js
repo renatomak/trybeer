@@ -6,9 +6,11 @@ import Card from './Card';
 import SideBar from '../components/SideBar';
 
 const Products = (props) => {
-  const { salesProducts, totalPriceSales } = useContext(TrybeerContext);
+  const { products, amount } = useContext(TrybeerContext);
+  const newProducts = products || [];
+  const totalValue = amount.toFixed(2).replace('.', ',');
+
   const { history } = props;
-  const totalPrice = String(totalPriceSales.toFixed(2)).replace('.', ',');
 
   const redirect = () => {
     history.push('/checkout');
@@ -26,11 +28,11 @@ const Products = (props) => {
     <div>
       <SideBar title="TryBeer" />
       <Container>
-        {salesProducts
-          .map((product, index) => (<Card
-            product={ product }
-            key={ index }
-            index={ index }
+        {newProducts
+          .map((item, index) => (<Card
+            product={ item }
+            key={ item.id }
+            index={ index.toString() }
           />))}
       </Container>
       <div>
@@ -39,12 +41,12 @@ const Products = (props) => {
           data-testid="checkout-bottom-btn"
           value="Ver carrinho"
           onClick={ redirect }
-          disabled={ totalPrice === '0,00' }
+          disabled={ totalValue === '0,00' }
         >
           Ver Carrinho
         </button>
         <span data-testid="checkout-bottom-btn-value">
-          {` R$  ${String(totalPriceSales.toFixed(2)).replace('.', ',')} `}
+          {` R$  ${totalValue}`}
         </span>
       </div>
     </div>
