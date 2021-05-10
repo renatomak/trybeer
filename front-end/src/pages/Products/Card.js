@@ -23,7 +23,7 @@ const Card = (props) => {
     const cart = [...products];
     cart[index].quantity = qtdProduct;
     setProducts(cart);
-  }, [qtdProduct]);
+  }, [index, products, qtdProduct, setProducts]);
 
   return (
     <CardContainer>

@@ -19,7 +19,7 @@ function Profile(props) {
 
   useEffect(() => {
     getProfile();
-  }, []);
+  }, [getProfile]);
 
   const validateData = () => {
     const nameRegex = /^[a-zA-Z\s]*$/;

@@ -16,11 +16,11 @@ function Checkout(props) {
     let price = 0;
     console.log(cart);
     cart.forEach((item) => {
-      price = price + (item.quantity * item.price);
+      price += (item.quantity * item.price);
     });
     setTotalPrice(price);
     setItens(cart);
-  }
+  };
 
   useEffect(() => {
     getTotalPrice();
@@ -37,9 +37,10 @@ function Checkout(props) {
 
   useEffect(() => {
     getProfile();
-  }, []);
+  }, [getProfile]);
 
-  const buttonDisabled = deliveryAddress === '' || deliveryNumber === '' || totalPrice === 0;
+  const buttonDisabled = deliveryAddress === ''
+    || deliveryNumber === '' || totalPrice === 0;
 
   const handleStreet = ({ target: { value } }) => {
     setdeliveryAddress(value);
@@ -53,7 +54,7 @@ function Checkout(props) {
     const { history } = props;
     setMessage('');
     localStorage.setItem('cart', '');
-    history.push('/products')
+    history.push('/products');
   };
 
   const handleCheckout = async () => {
@@ -72,37 +73,47 @@ function Checkout(props) {
     const newItens = itens.filter((product) => product.id !== item.id);
     localStorage.setItem('cart', JSON.stringify(newItens));
     getTotalPrice();
-  }
+  };
 
   return (
     <div>
       <SideBar title="Finalizar Pedido" />
-      {(itens.length === 0) ? <span>Não há produtos no carrinho</span> :
-        <ul>
-          {itens.map((item, index) => {
-            return (
-              <li key={index}>
-                <span data-testid={ `${index}-product-qtd-input` }>{item.quantity}</span><br/>
-                <span data-testid={ `${index}-product-name` }>{item.name}</span><br/>
-                <span data-testid={ `${index}-product-total-value` }>R$ {(item.price * item.quantity).toFixed(2).replace('.', ',')}</span><br/>
-                <span data-testid={ `${index}-product-unit-price` }>(R$ {Number(item.price).toFixed(2).replace('.', ',')} un)</span><br/>
-                <button
-                  type="button"
-                  value={item}
-                  data-testid={ `${index}-removal-button` }
-                  onClick={ () => handleDelete(item) }
-                >
-                  X
-                </button>
-              </li>
-            )
-          })}
-        </ul>
-      }
+      {(itens.length === 0) ? <span>Não há produtos no carrinho</span> : <ul>
+        {itens.map((item, index) => (
+          <li key={ index }>
+            <span data-testid={ `${index}-product-qtd-input` }>{item.quantity}</span>
+            <br />
+            <span data-testid={ `${index}-product-name` }>{item.name}</span>
+            <br />
+            <span data-testid={ `${index}-product-total-value` }>
+              R$
+              {(item.price * item.quantity).toFixed(2).replace('.', ',')}
+            </span>
+            <br />
+            <span data-testid={ `${index}-product-unit-price` }>
+              (R$
+              {Number(item.price).toFixed(2).replace('.', ',')}
+              {' '}
+              un)
+            </span>
+            <br />
+            <button
+              type="button"
+              value={ item }
+              data-testid={ `${index}-removal-button` }
+              onClick={ () => handleDelete(item) }
+            >
+              X
+            </button>
+          </li>
+        ))}
+      </ul>}
       <span
         data-testid="order-total-value"
       >
-        Total: R$ { totalPrice.toFixed(2).replace('.', ',') }
+        Total: R$
+        {' '}
+        { totalPrice.toFixed(2).replace('.', ',') }
       </span>
       <form>
         <label htmlFor="checkout-street-input">
