@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TrybeerContext from './TrybeerContext';
 
 function TrybeerProvider({ children }) {
-  const getCart = JSON.parse(localStorage.getItem('cart'));
+  const getCart = JSON.parse(localStorage.getItem('products'));
   const [products, setProducts] = useState(getCart);
   const [shopCart, setShopCart] = useState([]);
   const [amount, setAmount] = useState(0);
@@ -19,7 +19,8 @@ function TrybeerProvider({ children }) {
       setShopCart(cart);
       console.log(cart);
       localStorage.setItem('amount', JSON.stringify(total));
-      localStorage.setItem('cart', JSON.stringify(products));
+      localStorage.setItem('products', JSON.stringify(products));
+      localStorage.setItem('cart', JSON.stringify(cart));
     }
   }, [products]);
 
