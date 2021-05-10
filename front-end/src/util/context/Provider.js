@@ -17,7 +17,6 @@ function TrybeerProvider({ children }) {
 
       const cart = products.filter(({ quantity }) => quantity > 0);
       setShopCart(cart);
-      console.log(cart);
       localStorage.setItem('amount', JSON.stringify(total));
       localStorage.setItem('products', JSON.stringify(products));
       localStorage.setItem('cart', JSON.stringify(cart));

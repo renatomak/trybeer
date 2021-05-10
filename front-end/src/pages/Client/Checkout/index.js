@@ -13,7 +13,7 @@ function Checkout(props) {
   const [message, setMessage] = useState('');
 
   const getTotalPrice = () => {
-    const cart = localStorage.getItem('cart');
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
     let price = 0;
     console.log(cart);
     cart.forEach((item) => {
@@ -73,38 +73,40 @@ function Checkout(props) {
   };
 
   const handleDelete = (item) => {
-    itens.filter((product) => product !== item);
-    localStorage.setItem('cart', itens);
+    const newItens = itens.filter((product) => product.id !== item.id);
+    localStorage.setItem('cart', JSON.stringify(newItens));
     getTotalPrice();
   }
 
   return (
     <div>
       <SideBar title="Finalizar Pedido" />
-      <ul>
-        {itens.map((item, index) => {
-          return (
-            <li>
-              <span data-testid={ `${index}-product-qtd-input` }>{item.quantity}</span>
-              <span data-testid={ `${index}-product-name` }>{item.name}</span>
-              <span data-testid={ `${index}-product-total-value` }>{(item.price * item.quantity)}</span>
-              <span data-testid={ `${index}-product-unit-price` }>{item.price}</span>
-              <button
-                type="button"
-                data-testid={ `${index}-removal-button` }
-                onClick={ handleDelete(item) }
-              >
-                X
-              </button>
-            </li>
-          )
-        })}
-      </ul>
+      {(itens.length === 0) ? <span>Não há produtos no carrinho</span> :
+        <ul>
+          {itens.map((item, index) => {
+            return (
+              <li key={index}>
+                <span data-testid={ `${index}-product-qtd-input` }>{item.quantity}</span><br/>
+                <span data-testid={ `${index}-product-name` }>{item.name}</span><br/>
+                <span data-testid={ `${index}-product-total-value` }>R$ {(item.price * item.quantity).toFixed(2).replace('.', ',')}</span><br/>
+                <span data-testid={ `${index}-product-unit-price` }>(R$ {Number(item.price).toFixed(2).replace('.', ',')} un)</span><br/>
+                <button
+                  type="button"
+                  value={item}
+                  data-testid={ `${index}-removal-button` }
+                  onClick={ () => handleDelete(item) }
+                >
+                  X
+                </button>
+              </li>
+            )
+          })}
+        </ul>
+      }
       <span
         data-testid="order-total-value"
       >
-        Total: R$
-        { totalPrice }
+        Total: R$ { totalPrice.toFixed(2).replace('.', ',') }
       </span>
       <form>
         <label htmlFor="checkout-street-input">
