@@ -46,7 +46,7 @@ function Login(props) {
     console.log(LocalProducts);
 
     localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('cart', JSON.stringify(LocalProducts));
+    localStorage.setItem('products', JSON.stringify(LocalProducts));
 
     if (user.role === 'administrator') history.push('/admin/orders');
     if (user.role === 'client') history.push('/products');
