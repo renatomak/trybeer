@@ -21,6 +21,7 @@ const checkoutServices = async (pedido) => {
   dateFormat(saleDate, 'mm/dd/yyyy');
   const status = 'Pendente';
   const user = await getByEmail(email);
+  console.log(user);
   const userId = user.id;
   const dataSale = {
     userId,

@@ -5,12 +5,14 @@ import SideBar from '../../components/SideBar';
 
 function Checkout(props) {
   const [email, setEmail] = useState('');
-  const [buttonDisabled, setbuttonDisabled] = useState(true);
+  // const [buttonDisabled, setbuttonDisabled] = useState(true);
   const [deliveryAddress, setdeliveryAddress] = useState('');
   const [deliveryNumber, setdeliveryNumber] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
   const [itens, setItens] = useState([]);
   const [message, setMessage] = useState('');
+
+  const { history } = props;
 
   const getTotalPrice = () => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -21,7 +23,7 @@ function Checkout(props) {
     });
     setTotalPrice(price);
     setItens(cart);
-    validateInformation();
+    // validateInformation();
   }
 
   useEffect(() => {
@@ -41,19 +43,21 @@ function Checkout(props) {
     getProfile();
   }, []);
 
-  const validateInformation = () => {
-    if (deliveryAddress && deliveryNumber && totalPrice >= 0) setbuttonDisabled(false);
-    else setbuttonDisabled(true);
-  };
+  const buttonDisabled = deliveryAddress === '' || deliveryNumber === '' || totalPrice === 0;
+
+  // const validateInformation = () => {
+  //   if (deliveryAddress && deliveryNumber && totalPrice >= 0) setbuttonDisabled(false);
+  //   else setbuttonDisabled(true);
+  // };
 
   const handleStreet = ({ target: { value } }) => {
     setdeliveryAddress(value);
-    validateInformation();
+    // validateInformation();
   };
 
   const handleHouseNumber = ({ target: { value } }) => {
     setdeliveryNumber(value);
-    validateInformation();
+    // validateInformation();
   };
 
   const deleteMessage = () => {
@@ -61,6 +65,7 @@ function Checkout(props) {
   };
 
   const handleCheckout = async () => {
+    console.log(email, totalPrice, deliveryAddress, deliveryNumber, itens )
     const requestReturn = await fetchCheckout(
       { email, totalPrice, deliveryAddress, deliveryNumber, itens },
     );
@@ -69,6 +74,7 @@ function Checkout(props) {
       setMessage('Compra realizada com sucesso!');
       setTimeout(deleteMessage, timeout);
       localStorage.setItem('cart', '');
+      history.push('/products')
     } else setMessage(requestReturn.message);
   };
 
@@ -131,7 +137,7 @@ function Checkout(props) {
           type="button"
           data-testid="checkout-finish-btn"
           disabled={ buttonDisabled }
-          onClick={ handleCheckout }
+          onClick={ () => handleCheckout() }
         >
           Finalizar pedido
         </button>
