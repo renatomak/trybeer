@@ -1,42 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TrybeerContext from './TrybeerContext';
-import { fetchGetProducts } from '../../requests';
 
 function TrybeerProvider({ children }) {
-  const [salesProducts, setSalesProducts] = useState([]);
-  const [totalPriceSales, setTotalPriceSales] = useState(0);
-  const [loggedInUser, setLoggedInUser] = useState(false);
+  const getCart = JSON.parse(localStorage.getItem('products'));
+  const [products, setProducts] = useState(getCart);
   const [shopCart, setShopCart] = useState([]);
+  const [amount, setAmount] = useState(0);
+  const [loggedInUser, setLoggedInUser] = useState(false);
 
   useEffect(() => {
-    fetchGetProducts()
-      .then((result) => {
-        setSalesProducts(result);
-      });
+    if (products) {
+      const total = products
+        .reduce((acc, { quantity, price }) => acc + (quantity * price), 0);
+      setAmount(total);
 
-    if (localStorage.getItem('totalPriceSales')) {
-      setTotalPriceSales(
-        JSON.parse(localStorage.getItem('totalPriceSales')),
-      );
+      const cart = products.filter(({ quantity }) => quantity > 0);
+      setShopCart(cart);
+      console.log(cart);
+      localStorage.setItem('amount', JSON.stringify(total));
+      localStorage.setItem('products', JSON.stringify(products));
+      localStorage.setItem('cart', JSON.stringify(cart));
     }
-  }, []);
+  }, [products]);
 
-  useEffect(() => {
-    localStorage.setItem('totalPriceSales', JSON.stringify(totalPriceSales) || 0);
-  }, [totalPriceSales]);
-
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(shopCart));
-  }, [shopCart]);
   const context = {
-    salesProducts,
-    totalPriceSales,
-    setTotalPriceSales,
+    products,
+    amount,
+    setAmount,
     loggedInUser,
     setLoggedInUser,
     shopCart,
-    setShopCart };
+    setShopCart,
+    setProducts };
 
   return (
     <TrybeerContext.Provider value={ context }>
