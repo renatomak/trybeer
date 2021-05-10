@@ -12,14 +12,16 @@ function Checkout(props) {
   const [itens, setItens] = useState([]);
   const [message, setMessage] = useState('');
 
-  const cart = localStorage.getItem('cart');
-
   const getTotalPrice = () => {
+    const cart = localStorage.getItem('cart');
     let price = 0;
+    console.log(cart);
     cart.forEach((item) => {
       price = price + (item.quantity * item.price);
     });
     setTotalPrice(price);
+    setItens(cart);
+    validateInformation();
   }
 
   useEffect(() => {
@@ -44,11 +46,6 @@ function Checkout(props) {
     else setbuttonDisabled(true);
   };
 
-  const handleTotal = ({ target: { value } }) => {
-    setTotalPrice(value);
-    validateInformation();
-  };
-
   const handleStreet = ({ target: { value } }) => {
     setdeliveryAddress(value);
     validateInformation();
@@ -71,19 +68,21 @@ function Checkout(props) {
     if (requestReturn.message === 'Compra realizada com sucesso!') {
       setMessage('Compra realizada com sucesso!');
       setTimeout(deleteMessage, timeout);
-      // esvaziar carrinho
+      localStorage.setItem('cart', '');
     } else setMessage(requestReturn.message);
   };
 
-  const handleDelete = () => {
-
+  const handleDelete = (item) => {
+    itens.filter((product) => product !== item);
+    localStorage.setItem('cart', itens);
+    getTotalPrice();
   }
 
   return (
     <div>
       <SideBar title="Finalizar Pedido" />
       <ul>
-        {cart.map((item, index) => {
+        {itens.map((item, index) => {
           return (
             <li>
               <span data-testid={ `${index}-product-qtd-input` }>{item.quantity}</span>
@@ -93,7 +92,7 @@ function Checkout(props) {
               <button
                 type="button"
                 data-testid={ `${index}-removal-button` }
-                onClick={ handleDelete }
+                onClick={ handleDelete(item) }
               >
                 X
               </button>
@@ -103,8 +102,6 @@ function Checkout(props) {
       </ul>
       <span
         data-testid="order-total-value"
-        value={ totalPrice }
-        onChange={ handleTotal }
       >
         Total: R$
         { totalPrice }
