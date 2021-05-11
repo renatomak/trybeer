@@ -1,0 +1,4 @@
+.containerCardOrder {
+  display: flex;
+  justify-content: space-between;
+}
