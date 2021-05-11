@@ -65,7 +65,7 @@ function Register(props) {
     ));
     setProducts(LocalProducts);
 
-    localStorage.setItem('cart', JSON.stringify(LocalProducts));
+    localStorage.setItem('products', JSON.stringify(LocalProducts));
     localStorage.setItem('user', JSON.stringify(user));
     if (user.role === 'administrator') history.push('/admin/orders');
     if (user.role === 'client') history.push('/products');
