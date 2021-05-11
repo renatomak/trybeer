@@ -53,9 +53,50 @@ function fetchGetProducts() {
     .catch((err) => console.log(err.message));
 }
 
+function fetchCheckout({ email, totalPrice, deliveryAddress, deliveryNumber, itens }) {
+  const endpoint = 'http://localhost:3001/checkout';
+  const checkoutData = { email, totalPrice, deliveryAddress, deliveryNumber, itens };
+  return fetch(
+    endpoint,
+    {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(checkoutData),
+    },
+  )
+    .then((response) => response.json())
+    .then((data) => data);
+}
+
+function fetchGetOrders() {
+  const endpoint = 'http://localhost:3001/orders';
+  return fetch(endpoint)
+    .then((response) => response.json())
+    .then((data) => data)
+    .catch((err) => console.log(err.message));
+}
+
+/**
+ * delivery_address,
+delivery_number,
+id,
+name,
+price,
+product_id,
+quantity,
+sale_date,
+sale_id,
+status,
+total_price,
+url_image,
+user_id,
+ */
+
 export {
   fetchLogin,
   fetchRegister,
   fetchUser,
   fetchGetProducts,
+  fetchCheckout,
+  fetchGetOrders,
 };
