@@ -18,6 +18,6 @@ router.post('/profile', profile);
 router.get('/products', products);
 router.get('/images/:imageName', images);
 router.post('/checkout', checkout);
-router.get('/orders', orders);
+router.post('/orders', orders);
 
 module.exports = router;

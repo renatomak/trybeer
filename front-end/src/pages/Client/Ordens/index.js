@@ -8,35 +8,36 @@ import { fetchGetOrders } from '../../../requests';
 const Ordens = (props) => {
   const { orders, setOrders } = useContext(TrybeerContext);
 
+  const userLogged = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const { history } = props;
+
+    if (!user) {
+      return history.push('/login');
+    }
+  };
+
   const getOrders = async () => {
-    const listOrders = await fetchGetOrders();
+    const user = JSON.parse(localStorage.getItem('user'));
+    const { email } = user || '';
+    const listOrders = await fetchGetOrders(email);
     console.log(listOrders);
     setOrders([listOrders]);
   };
 
   useEffect(() => {
+    userLogged();
     getOrders();
   }, []);
-
-  const userLogged = () => {
-    const { history } = props;
-    const user = localStorage.getItem('user');
-    if (!user) {
-      return history.push('/login');
-    }
-  };
-  userLogged();
 
   return (
     <div>
       <SideBar title="Meus Pedidos" />
-      Meus pedidos
       {orders
         .map(
           (order, index) => (
-            <CardOrder order={ order } key={ order.id } { ...props } index={ index } />),
+            <CardOrder order={ order } key={ index } { ...props } index={ index } />),
         ) }
-
     </div>
   );
 };
