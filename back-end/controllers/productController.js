@@ -1,12 +1,10 @@
 const fs = require('fs');
 const path = require('path');
-
 const {
   productsServices,
   checkoutServices,
   ordersServices,
 } = require('../services/productsServices');
-const { getOrders } = require('../models/productModels');
 
 const {
   OK_200,
@@ -49,6 +47,7 @@ const {
   const orders = async (req, res) => {
     try {
       const { email } = req.body;
+      console.log(req.body, '   ', email);
       const pedidos = await ordersServices(email);      
       res.status(OK_200).json(pedidos);
     } catch (err) {
