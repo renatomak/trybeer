@@ -8,7 +8,6 @@ const productsServices = async () => {
 };
 
 const saleProd = async (saleId, itens) => {
-  console.log(saleId, itens);
   itens.forEach(async (item) => {
     const { id, quantity } = item;
     await addSaleProd(saleId, id, quantity);
