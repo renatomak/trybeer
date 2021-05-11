@@ -1,5 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+
+const CardOrder = (props) => {
+  const { order: { id, totalPrice, saleDate }, index } = props;
 import './style.css';
 
 const CardOrder = (props) => {
@@ -11,6 +15,7 @@ const CardOrder = (props) => {
   const numSlice = -2;
   const mes = (`0${date.getMonth() + 1}`).slice(numSlice);
   const formatDate = `${date.getDate()}/${mes}`;
+
 
   const details = () => {
     const { history } = props;

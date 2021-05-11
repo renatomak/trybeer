@@ -1,7 +1,13 @@
 const fs = require('fs');
 const path = require('path');
-const { productsServices, checkoutServices } = require('../services/productsServices');
+
+const {
+  productsServices,
+  checkoutServices,
+  ordersServices,
+} = require('../services/productsServices');
 const { getOrders } = require('../models/productModels');
+
 const {
   OK_200,
   UNAUTHORIZED_401 } = require('../util');
@@ -40,37 +46,14 @@ const {
     }
   };
 
-  const newOrders = (array) => {
-    const { delivery_address: deliveryAddress, delivery_number: deliveryNumber,
-      id, name, price, product_id: productId, quantity, sale_date: saleDate,
-      sale_id: saleId, status, total_price: totalPrice, url_image: urlImage,
-      user_id: userId } = array;
-
-    return { deliveryAddress,
-      deliveryNumber,
-      id,
-      name,
-      price,
-      productId,
-      quantity,
-      saleDate,
-      saleId,
-      status,
-      totalPrice,
-      urlImage,
-      userId };
-  };
-
   const orders = async (req, res) => {
     try {
-      const result = await getOrders();
-
-      const newResult = newOrders(result);
-      
-      res.status(OK_200).json(newResult);
+      const { email } = req.body;
+      const pedidos = await ordersServices(email);      
+      res.status(OK_200).json(pedidos);
     } catch (err) {
       console.error(err.message);
-      res.status(UNAUTHORIZED_401).send({ message: internalError });  
+      res.status(UNAUTHORIZED_401).send({ message: internalError });    
     }
   };
 

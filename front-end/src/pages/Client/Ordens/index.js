@@ -1,7 +1,9 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
 import SideBar from '../../components/SideBar';
 import CardOrder from './CardOrder';
+import data from './data';
 import { TrybeerContext } from '../../../util';
 import { fetchGetOrders } from '../../../requests';
 
@@ -27,16 +29,22 @@ const Ordens = (props) => {
   };
   userLogged();
 
+const Ordens = () => {
   return (
     <div>
       <SideBar title="Meus Pedidos" />
       Meus pedidos
+      {data
+        .map((order, index) => (<CardOrder
+          order={ order }
+          key={ order.id }
+          index={ index }
+        />)) }
       {orders
         .map(
           (order, index) => (
             <CardOrder order={ order } key={ order.id } { ...props } index={ index } />),
         ) }
-
     </div>
   );
 };

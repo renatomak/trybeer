@@ -29,19 +29,18 @@ const addSaleProd = async (saleId, productId, quantity) => {
     [saleId.insertId, productId, quantity]);
 };
 
-const getOrders = async () => {
-  const query = `SELECT * FROM Trybeer.sales S, Trybeer.products P, Trybeer.sales_products SP 
-  WHERE S.id = SP.sale_id AND P.id = SP.product_id`;
-  const [[orders]] = await connection.execute(query);
 
-  return orders;
+const getOrdersByUserId = async (userId) => {
+  const [pedidos] = await connection.execute('SELECT * FROM sales WHERE user_id = ? ORDER BY id;',
+    [userId]);
+  return pedidos;
 };
 
 module.exports = {
   getProducts,
   addSale,
   addSaleProd,
-  getOrders,
+  getOrdersByUserId,
 };
 
 // {
