@@ -1,49 +1,42 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
 import SideBar from '../../components/SideBar';
 import CardOrder from './CardOrder';
-import data from './data';
 import { TrybeerContext } from '../../../util';
 import { fetchGetOrders } from '../../../requests';
 
 const Ordens = (props) => {
   const { orders, setOrders } = useContext(TrybeerContext);
 
+  const userLogged = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const { history } = props;
+
+    if (!user) {
+      return history.push('/login');
+    }
+  };
+
   const getOrders = async () => {
-    const listOrders = await fetchGetOrders();
+    const user = JSON.parse(localStorage.getItem('user'));
+    const { email } = user || '';
+    const listOrders = await fetchGetOrders(email);
     console.log(listOrders);
     setOrders([listOrders]);
   };
 
   useEffect(() => {
+    userLogged();
     getOrders();
   }, []);
 
-  const userLogged = () => {
-    const { history } = props;
-    const user = localStorage.getItem('user');
-    if (!user) {
-      return history.push('/login');
-    }
-  };
-  userLogged();
-
-const Ordens = () => {
   return (
     <div>
       <SideBar title="Meus Pedidos" />
-      Meus pedidos
-      {data
-        .map((order, index) => (<CardOrder
-          order={ order }
-          key={ order.id }
-          index={ index }
-        />)) }
       {orders
         .map(
           (order, index) => (
-            <CardOrder order={ order } key={ order.id } { ...props } index={ index } />),
+            <CardOrder order={ order } key={ index } { ...props } index={ index } />),
         ) }
     </div>
   );

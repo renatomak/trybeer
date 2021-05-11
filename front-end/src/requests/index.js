@@ -68,13 +68,38 @@ function fetchCheckout({ email, totalPrice, deliveryAddress, deliveryNumber, ite
     .then((data) => data);
 }
 
-function fetchGetOrders() {
+/* function fetchGetOrders(email) {
   const endpoint = 'http://localhost:3001/orders';
-  return fetch(endpoint)
+  console.log(email);
+  return fetch(
+    endpoint,
+    {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    })
     .then((response) => response.json())
     .then((data) => data)
     .catch((err) => console.log(err.message));
-}
+} */
+
+const fetchGetOrders = (userEmail) => {
+  const endpoint = 'http://localhost:3001/orders';
+  const email = { email: userEmail };
+  console.log(email);
+  return fetch(
+    endpoint,
+    {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(email),
+    },
+  )
+    .then((response) => response.json())
+    .then((data) => data);
+};
 
 /**
  * delivery_address,

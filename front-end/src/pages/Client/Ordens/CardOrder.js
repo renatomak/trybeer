@@ -1,22 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
-const CardOrder = (props) => {
-  const { order: { id, totalPrice, saleDate }, index } = props;
-import './style.css';
-
 const CardOrder = (props) => {
   const { order, index } = props;
-  const { id, saleDate, totalPrice } = order;
+  const { id, sale_date: saleDate, total_price: totalPrice } = order;
 
-  console.log(totalPrice);
+  console.log(order);
+
   const date = new Date(saleDate);
   const numSlice = -2;
   const mes = (`0${date.getMonth() + 1}`).slice(numSlice);
   const formatDate = `${date.getDate()}/${mes}`;
 
-
+  console.log(id, saleDate, totalPrice);
   const details = () => {
     const { history } = props;
     history.push('/orders/1');
@@ -49,10 +45,10 @@ CardOrder.propTypes = {
     push: PropTypes.func.isRequired,
   }).isRequired,
   index: PropTypes.number.isRequired,
-  order: PropTypes.shape({
+  order: PropTypes.objectOf({
     id: PropTypes.any,
-    saleDate: PropTypes.any,
-    totalPrice: PropTypes.any,
+    sale_date: PropTypes.any,
+    total_price: PropTypes.any,
   }).isRequired,
 };
 
