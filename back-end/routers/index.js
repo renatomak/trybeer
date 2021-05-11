@@ -6,7 +6,7 @@ const {
   images,
   checkout,
   orders,
-  adminorders,
+  adminOrders,
 } = require('../controllers/productController');
 
 const router = express.Router();
@@ -25,6 +25,6 @@ router.get('/products', products);
 router.get('/images/:imageName', images);
 router.post('/checkout', checkout);
 router.post('/orders', orders);
-router.get('/adminorders', adminorders);
+router.get('/adminorders', adminOrders);
 
 module.exports = router;
