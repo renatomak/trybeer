@@ -87,15 +87,11 @@ function Checkout(props) {
             <span data-testid={ `${index}-product-name` }>{item.name}</span>
             <br />
             <span data-testid={ `${index}-product-total-value` }>
-              R$
-              {(item.price * item.quantity).toFixed(2).replace('.', ',')}
+              {`R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}`}
             </span>
             <br />
             <span data-testid={ `${index}-product-unit-price` }>
-              (R$
-              {Number(item.price).toFixed(2).replace('.', ',')}
-              {' '}
-              un)
+              {`(R$ ${Number(item.price).toFixed(2).replace('.', ',')} un)`}
             </span>
             <br />
             <button
@@ -111,9 +107,7 @@ function Checkout(props) {
       <span
         data-testid="order-total-value"
       >
-        Total: R$
-        {' '}
-        { totalPrice.toFixed(2).replace('.', ',') }
+        {`Total: R$ ${totalPrice.toFixed(2).replace('.', ',')}`}
       </span>
       <form>
         <label htmlFor="checkout-street-input">
