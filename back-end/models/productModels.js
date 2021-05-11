@@ -30,13 +30,18 @@ const addSaleProd = async (saleId, productId, quantity) => {
 };
 
 const getOrdersByUserId = async (userId) => {
+  // CHECAR ESSE PONTO COM RENATO
   const [[pedidos]] = await connection.execute('SELECT * FROM sales WHERE user_id = ? ORDER BY id;',
     [userId]);
   return pedidos;
 };
 
 const getOrders = async () => {
-  const pedidos = await connection.execute('SELECT * FROM sales ORDER BY id;');
+  const [pedidos] = await connection.execute(`SELECT
+    id AS orderNum,
+    total_price AS orderValue,
+    delivery_address AS orderAddress,
+    delivery_number AS orderAddressNum, status FROM sales ORDER BY id;`);
   return pedidos;
 };
 
