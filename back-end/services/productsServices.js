@@ -4,8 +4,10 @@ const {
   addSale,
   addSaleProd,
   getOrdersByUserId,
+  getSaleProducts,
   getOrders,
 } = require('../models/productModels');
+
 const { getByEmail } = require('../models/userModels');
 
 const productsServices = async () => {
@@ -53,6 +55,11 @@ const ordersServices = async (email) => {
   return { message: 'Email não informado' };
 };
 
+const saleProductsServices = async (id) => {
+  const result = await getSaleProducts(id);
+  return result;
+};
+
 const admOrdersServices = async () => {
   const pedidos = await getOrders();
   return pedidos;
@@ -62,5 +69,6 @@ module.exports = {
   productsServices,
   checkoutServices,
   ordersServices,
+  saleProductsServices,
   admOrdersServices,
 };

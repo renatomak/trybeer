@@ -6,6 +6,7 @@ const {
   images,
   checkout,
   orders,
+  saleProducts,
   adminOrders,
 } = require('../controllers/productController');
 
@@ -25,6 +26,7 @@ router.get('/products', products);
 router.get('/images/:imageName', images);
 router.post('/checkout', checkout);
 router.post('/orders', orders);
+router.get('/orders/:id', saleProducts);
 router.get('/adminorders', adminOrders);
 
 module.exports = router;

@@ -35,6 +35,21 @@ const getOrdersByUserId = async (userId) => {
   return pedidos;
 };
 
+const getSaleProducts = async (id) => {
+  const query = `SELECT sp.sale_id AS saleId, p.id AS productId, sp.quantity,
+  p.name, (p.price * sp.quantity) as total,
+  date_format(s.sale_date, "%d/%m") as saleDate
+  FROM sales_products AS sp
+  INNER JOIN products AS p 
+  INNER JOIN
+  sales AS s
+  ON p.id = sp.product_id AND s.id = sp.sale_id
+  WHERE sale_id =?;`;
+  const [result] = await connection.execute(query, [id]);
+
+  return result;
+};
+
 const getOrders = async () => {
   const [pedidos] = await connection.execute(`SELECT
     id AS orderNum,
@@ -49,5 +64,6 @@ module.exports = {
   addSale,
   addSaleProd,
   getOrdersByUserId,
+  getSaleProducts,
   getOrders,
 };
