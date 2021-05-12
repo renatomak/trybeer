@@ -1,43 +1,38 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { TrybeerContext } from '../../../util';
 import SideBar from '../../components/SideBar';
-import data from './data';
+import DetailsItens from './DetailsItens';
+import './Style.css';
 
-const Details = () => {
-  let total = 0;
+const Details = (props) => {
+  const { salesDetails } = useContext(TrybeerContext);
+
+  const userLogged = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const { history } = props;
+
+    if (!user) {
+      return history.push('/login');
+    }
+  };
+
+  useEffect(() => {
+    userLogged();
+  }, []);
+
   return (
     <div>
       <SideBar title="Detalhes de Pedido" />
-      <div>
-        <div>
-          <span data-testid="order-number">Pedido 1</span>
-          <span data-testid="order-date">08/09</span>
-        </div>
-        <div>
-          <ul>
-            {data.map((item, index) => {
-              total += parseFloat(item.price);
-              return (
-                <li key={ index }>
-                  <span data-testid={ `${index}-product-qtd` }>{item.quantity}</span>
-                  <span data-testid={ `${index}-product-name` }>
-                    {item.name}
-                  </span>
-                  <span data-testid={ `${index}-product-total-value` }>
-                    {item.price}
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <div>
-          <span data-testid="order-total-value">
-            {`Total: R$ ${total}`}
-          </span>
-        </div>
-      </div>
+      { (salesDetails.length) && <DetailsItens salesDetails={ salesDetails } /> }
     </div>
   );
+};
+
+Details.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 export default Details;

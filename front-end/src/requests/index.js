@@ -68,23 +68,6 @@ function fetchCheckout({ email, totalPrice, deliveryAddress, deliveryNumber, ite
     .then((data) => data);
 }
 
-/* function fetchGetOrders(email) {
-  const endpoint = 'http://localhost:3001/orders';
-  console.log(email);
-  return fetch(
-    endpoint,
-    {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({ email }),
-    })
-    .then((response) => response.json())
-    .then((data) => data)
-    .catch((err) => console.log(err.message));
-} */
-
 const fetchGetOrders = (userEmail) => {
   const endpoint = 'http://localhost:3001/orders';
   const email = { email: userEmail };
@@ -101,21 +84,12 @@ const fetchGetOrders = (userEmail) => {
     .then((data) => data);
 };
 
-/**
- * delivery_address,
-delivery_number,
-id,
-name,
-price,
-product_id,
-quantity,
-sale_date,
-sale_id,
-status,
-total_price,
-url_image,
-user_id,
- */
+const fetchGetSalesProducts = (id) => {
+  const endpoint = `http://localhost:3001/orders/${id}`;
+  return fetch(endpoint)
+    .then((response) => response.json())
+    .then((data) => data);
+};
 
 export {
   fetchLogin,
@@ -124,4 +98,5 @@ export {
   fetchGetProducts,
   fetchCheckout,
   fetchGetOrders,
+  fetchGetSalesProducts,
 };
