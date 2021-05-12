@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 const DetailsItens = (props) => {
   const { salesDetails } = props;
-  console.log(salesDetails)
+  console.log(salesDetails);
   const salesTotalPrice = salesDetails
     .reduce(
-      (acc, { quantity, price }) => acc + (parseFloat(quantity) * parseFloat(price)), 0,
+      (acc, { total }) => acc + (parseFloat(total)), 0,
     );
 
   return (
@@ -17,8 +17,8 @@ const DetailsItens = (props) => {
       </div>
       <div>
         <ul>
-          {salesDetails.map(({ price, quantity, name }, index) => {
-            const salesPrice = (price * quantity).toFixed(2).replace('.', ',');
+          {salesDetails.map(({ total, quantity, name }, index) => {
+            const salesPrice = total.toFixed(2).replace('.', ',');
             return (
               <li key={ index } className="detailsContainer">
                 <span data-testid={ `${index}-product-qtd` }>{quantity}</span>

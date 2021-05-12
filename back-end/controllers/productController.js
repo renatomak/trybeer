@@ -48,7 +48,6 @@ const {
   const orders = async (req, res) => {
     try {
       const { email } = req.body;
-      console.log(req.body, '   ', email);
       const pedidos = await ordersServices(email);      
       res.status(OK_200).json(pedidos);
     } catch (err) {

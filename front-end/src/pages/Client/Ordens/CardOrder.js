@@ -17,6 +17,8 @@ const CardOrder = (props) => {
 
   const details = async () => {
     const detailsSales = await fetchGetSalesProducts(id);
+
+    console.log('ID: ', id);
     console.log('DetailsSales: ', detailsSales);
     setSalesDetails(detailsSales);
 
@@ -24,18 +26,18 @@ const CardOrder = (props) => {
     history.push('/orders/1');
   };
 
-  const onKeyPressHandler = () => '';
-
   return (
     <div
       className="containerCardOrder"
-      role="button"
       data-testid={ `${index}-order-card-container` }
-      onClick={ details }
-      onKeyPress={ onKeyPressHandler }
-      tabIndex="0"
     >
-      <span data-testid={ `${index}-order-number` }>{ `Pedido ${id}` }</span>
+      <button
+        type="button"
+        onClick={ details }
+        data-testid={ `${index}-order-number` }
+      >
+        { `Pedido ${id}` }
+      </button>
       <span data-testid={ `${index}-order-date` }>{formatDate}</span>
 
       <span

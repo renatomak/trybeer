@@ -24,7 +24,7 @@ const Details = (props) => {
   return (
     <div>
       <SideBar title="Detalhes de Pedido" />
-      { (salesDetails.length) && <DetailsItens salesDetails={ salesDetails } /> }
+      <DetailsItens salesDetails={ salesDetails } />
     </div>
   );
 };
