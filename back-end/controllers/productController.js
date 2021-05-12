@@ -4,6 +4,7 @@ const {
   productsServices,
   checkoutServices,
   ordersServices,
+  saleProductsServices,
 } = require('../services/productsServices');
 
 const {
@@ -56,9 +57,21 @@ const {
     }
   };
 
+  const saleProducts = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const result = await saleProductsServices(id);
+      res.status(OK_200).json(result);
+    } catch (err) {
+      console.error(err.message);
+      res.status(UNAUTHORIZED_401).send({ message: internalError });
+    }
+  };
+
   module.exports = {
     products,
     images,
     checkout,
     orders,
+    saleProducts,
   };

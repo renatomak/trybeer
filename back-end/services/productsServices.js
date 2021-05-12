@@ -1,5 +1,6 @@
 const dateFormat = require('dateformat');
-const { getProducts, addSale, addSaleProd, getOrdersByUserId } = require('../models/productModels');
+const { getProducts, addSale, addSaleProd,
+  getOrdersByUserId, getSaleProducts } = require('../models/productModels');
 const { getByEmail } = require('../models/userModels');
 
 const productsServices = async () => {
@@ -48,8 +49,19 @@ const ordersServices = async (email) => {
   return { message: 'Email não informado' };
 };
 
+const saleProductsServices = async (id) => {
+  const result = await getSaleProducts(id);
+/*   const newArray = result.map((item) => { 
+   const newItem = { ...item };
+   newItem.saleDate = dateFormat(item.saleDate, 'mm/dd');
+  return newItem;
+  }); */
+  return result;
+};
+
 module.exports = {
   productsServices,
   checkoutServices,
   ordersServices,
+  saleProductsServices,
 };
