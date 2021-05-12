@@ -7,6 +7,7 @@ function TrybeerProvider({ children }) {
   const [products, setProducts] = useState(getCart);
   const [shopCart, setShopCart] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [salesDetails, setSalesDetails] = useState([]);
   const [amount, setAmount] = useState(0);
   const [loggedInUser, setLoggedInUser] = useState(false);
 
@@ -34,7 +35,9 @@ function TrybeerProvider({ children }) {
     setShopCart,
     setProducts,
     orders,
-    setOrders };
+    setOrders,
+    salesDetails,
+    setSalesDetails };
 
   return (
     <TrybeerContext.Provider value={ context }>
