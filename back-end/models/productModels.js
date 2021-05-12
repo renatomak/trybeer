@@ -44,7 +44,7 @@ const getSaleProducts = async (id) => {
   INNER JOIN
   sales AS s
   ON p.id = sp.product_id AND s.id = sp.sale_id
-  WHERE sale_id = 2;`;
+  WHERE sale_id =?;`;
   const [result] = await connection.execute(query, [id]);
 
   return result;

@@ -71,7 +71,6 @@ function fetchCheckout({ email, totalPrice, deliveryAddress, deliveryNumber, ite
 const fetchGetOrders = (userEmail) => {
   const endpoint = 'http://localhost:3001/orders';
   const email = { email: userEmail };
-  console.log(email);
   return fetch(
     endpoint,
     {
@@ -81,7 +80,10 @@ const fetchGetOrders = (userEmail) => {
     },
   )
     .then((response) => response.json())
-    .then((data) => data);
+    .then((data) => {
+      console.log(data);
+      return data;
+    });
 };
 
 const fetchGetSalesProducts = (id) => {

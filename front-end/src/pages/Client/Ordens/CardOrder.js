@@ -8,8 +8,6 @@ const CardOrder = (props) => {
   const { order, index } = props;
   const { id, sale_date: saleDate, total_price: totalPrice } = order;
 
-  console.log(order);
-
   const date = new Date(saleDate);
   const numSlice = -2;
   const mes = (`0${date.getMonth() + 1}`).slice(numSlice);
