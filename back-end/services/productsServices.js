@@ -6,6 +6,9 @@ const {
   getOrdersByUserId,
   getSaleProducts,
   getOrders,
+  getSaleAdmin,
+  getSaleProductsAdmin,
+  findSale,
 } = require('../models/productModels');
 
 const { getByEmail } = require('../models/userModels');
@@ -65,10 +68,22 @@ const admOrdersServices = async () => {
   return pedidos;
 };
 
+const admOrdersDetailsServices = async (id) => {
+  const sale = await findSale(id);
+  if (sale) {
+    const headerOrder = await getSaleAdmin(id);
+    const orderDetails = await getSaleProductsAdmin(id);
+    const { orderNum, orderStatus, orderTotalValue } = headerOrder;  
+    return { orderNum, orderStatus, orderTotalValue, itens: orderDetails };
+  }
+  return {};
+};
+
 module.exports = {
   productsServices,
   checkoutServices,
   ordersServices,
   saleProductsServices,
   admOrdersServices,
+  admOrdersDetailsServices,
 };

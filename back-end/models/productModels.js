@@ -59,6 +59,36 @@ const getOrders = async () => {
   return pedidos;
 };
 
+const findSale = async (id) => {
+  const [[sale]] = await connection.execute('SELECT * FROM sales WHERE id = ?;', [id]);
+  return sale;
+};
+
+const getSaleAdmin = async (id) => {
+  const [[headerOrder]] = await connection.execute(
+    `SELECT
+      id AS orderNum,
+      status AS orderStatus,
+      total_price AS orderTotalValue
+      FROM sales WHERE id = ?;`, [id],
+  );
+  return headerOrder;
+};
+
+const getSaleProductsAdmin = async (id) => {
+  const query = `SELECT
+  sp.quantity AS itenQuantity,
+  p.name AS itenName,
+  p.price AS itenPriceUn,
+  (p.price * sp.quantity) as itenPriceTotal
+  FROM sales_products AS sp
+  INNER JOIN products AS p
+  ON p.id = sp.product_id
+  WHERE sale_id = ?;`;
+  const [itens] = await connection.execute(query, [id]);
+  return itens;
+};
+
 module.exports = {
   getProducts,
   addSale,
@@ -66,4 +96,7 @@ module.exports = {
   getOrdersByUserId,
   getSaleProducts,
   getOrders,
+  getSaleAdmin,
+  getSaleProductsAdmin,
+  findSale,
 };

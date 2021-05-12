@@ -1,5 +1,4 @@
 const express = require('express');
-// const multer = require('multer');
 const { login, register, profile } = require('../controllers/userController');
 const {
   products,
@@ -8,16 +7,10 @@ const {
   orders,
   saleProducts,
   adminOrders,
+  adminOrdersDetails,
 } = require('../controllers/productController');
 
 const router = express.Router();
-
-// const storage = multer.diskStorage({
-//   destination: (req, file, callback) => {
-//     callback(null, 'images');
-//   },
-// });
-// const upload = multer({ storage });
 
 router.post('/login', login);
 router.post('/register', register);
@@ -28,5 +21,6 @@ router.post('/checkout', checkout);
 router.post('/orders', orders);
 router.get('/orders/:id', saleProducts);
 router.get('/adminorders', adminOrders);
+router.get('/adminorders/:id', adminOrdersDetails);
 
 module.exports = router;
