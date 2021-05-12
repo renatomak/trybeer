@@ -10,13 +10,13 @@ import Checkout from './pages/Client/Checkout';
 import AdminProfile from './pages/AdminProfile';
 import Details from './pages/Client/DetailsOfProducts';
 import Orders from './pages/Client/Ordens';
+import AdminOrders from './pages/AdminOrders';
 
 const Routes = () => (
   <main>
     <Switch>
       <Route exact path="/" component={ Login } />
       <Route path="/login" component={ Login } />
-      <Route exact path="/admin/orders" component={ Home } />
       <Route path="/products" component={ Products } />
       <Route path="/register" component={ Register } />
       <Route path="/profile" component={ Profile } />
@@ -24,6 +24,7 @@ const Routes = () => (
       <Route exact path="/admin/profile" component={ AdminProfile } />
       <Route exact path="/orders/:id_order" component={ Details } />
       <Route exact path="/orders" component={ Orders } />
+      <Route exact path="/admin/orders" component={ AdminOrders } />
     </Switch>
   </main>
 );

@@ -10,7 +10,7 @@ const { getByEmail } = require('../models/userModels');
 
 const productsServices = async () => {
   const products = await getProducts();
-  return products;  
+  return products;
 };
 
 const saleProd = async (saleId, itens) => {

@@ -1,27 +1,24 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
-import SideBar from '../../components/SideBar';
-import CardOrder from './CardOrder';
-import { TrybeerContext } from '../../../util';
-import { fetchGetOrders } from '../../../requests';
+import AdminSideBar from '../components/AdminSideBar';
+import Card from './Card';
+import { TrybeerContext } from '../../util';
+import { fetchAdminOrders } from '../../requests';
 
-const Ordens = (props) => {
+const AdminOrders = (props) => {
   const { orders, setOrders } = useContext(TrybeerContext);
 
   const userLogged = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     const { history } = props;
-
     if (!user) {
       return history.push('/login');
     }
   };
 
   const getOrders = async () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const { email } = user || '';
-    const listOrders = await fetchGetOrders(email);
-    setOrders([listOrders]);
+    const adminOrders = await fetchAdminOrders();
+    setOrders(adminOrders);
   };
 
   useEffect(() => {
@@ -31,20 +28,20 @@ const Ordens = (props) => {
 
   return (
     <div>
-      <SideBar title="Meus Pedidos" />
+      <AdminSideBar title="TryBeer" />
       {orders
         .map(
           (order, index) => (
-            <CardOrder order={ order } key={ index } { ...props } index={ index } />),
+            <Card order={ order } key={ index } { ...props } index={ index } />),
         ) }
     </div>
   );
 };
 
-Ordens.propTypes = {
+AdminOrders.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
 };
 
-export default Ordens;
+export default AdminOrders;
