@@ -22,8 +22,7 @@ const Ordens = (props) => {
     const user = JSON.parse(localStorage.getItem('user'));
     const { email } = user || '';
     const listOrders = await fetchGetOrders(email);
-    console.log(listOrders);
-    setOrders([listOrders]);
+    setOrders(listOrders);
   };
 
   useEffect(() => {
