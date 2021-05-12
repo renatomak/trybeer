@@ -13,6 +13,7 @@ const CardOrder = (props) => {
   const mes = (`0${date.getMonth() + 1}`).slice(numSlice);
   const formatDate = `${date.getDate()}/${mes}`;
 
+
   const details = async () => {
     const detailsSales = await fetchGetSalesProducts(id);
 

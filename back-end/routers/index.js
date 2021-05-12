@@ -1,8 +1,15 @@
 const express = require('express');
 // const multer = require('multer');
 const { login, register, profile } = require('../controllers/userController');
-const { products, images, checkout,
-  orders, saleProducts } = require('../controllers/productController');
+const {
+  products,
+  images,
+  checkout,
+  orders,
+  saleProducts,
+  adminOrders,
+} = require('../controllers/productController');
+
 
 const router = express.Router();
 
@@ -21,5 +28,7 @@ router.get('/images/:imageName', images);
 router.post('/checkout', checkout);
 router.post('/orders', orders);
 router.get('/orders/:id', saleProducts);
+router.get('/adminorders', adminOrders);
+
 
 module.exports = router;

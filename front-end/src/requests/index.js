@@ -93,6 +93,15 @@ const fetchGetSalesProducts = (id) => {
     .then((data) => data);
 };
 
+const fetchAdminOrders = () => {
+  const endpoint = 'http://localhost:3001/adminorders';
+  return fetch(
+    endpoint,
+  )
+    .then((response) => response.json())
+    .then((data) => data);
+};
+
 export {
   fetchLogin,
   fetchRegister,
@@ -101,4 +110,5 @@ export {
   fetchCheckout,
   fetchGetOrders,
   fetchGetSalesProducts,
+  fetchAdminOrders,
 };

@@ -5,6 +5,7 @@ const {
   checkoutServices,
   ordersServices,
   saleProductsServices,
+  admOrdersServices,
 } = require('../services/productsServices');
 
 const {
@@ -67,10 +68,21 @@ const {
     }
   };
 
+  const adminOrders = async (req, res) => {
+    try {
+      const pedidos = await admOrdersServices();
+      res.status(OK_200).json(pedidos);
+    } catch (err) {
+      console.error(err.message);
+      res.status(UNAUTHORIZED_401).send({ message: internalError });    
+    }
+  };
+
   module.exports = {
     products,
     images,
     checkout,
     orders,
     saleProducts,
+    adminOrders,
   };
