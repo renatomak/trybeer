@@ -10,7 +10,6 @@ const {
   adminOrders,
 } = require('../controllers/productController');
 
-
 const router = express.Router();
 
 // const storage = multer.diskStorage({
@@ -29,6 +28,5 @@ router.post('/checkout', checkout);
 router.post('/orders', orders);
 router.get('/orders/:id', saleProducts);
 router.get('/adminorders', adminOrders);
-
 
 module.exports = router;
