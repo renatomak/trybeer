@@ -36,10 +36,11 @@ const getOrdersByUserId = async (userId) => {
 };
 
 const getSaleProducts = async (id) => {
-  const query = `SELECT sale_id as saleId, product_id as productId, quantity, name, 
-  price, date_format(sale_date, "%d/%m") as saleDate FROM Trybeer.sales_products SP, 
-  Trybeer.products P, Trybeer.sales S
-  WHERE SP.product_id = P.id AND SP.sale_id = S.id AND SP.sale_id=?;`;
+  const query = `SELECT sp.sale_id, sp.quantity, p.name, (p.price * sp.quantity) as total
+  FROM sales_products AS sp
+  INNER JOIN products AS p
+  ON p.id = sp.product_id
+  WHERE sale_id =?;`;
   const [result] = await connection.execute(query, [id]);
 
   return result;

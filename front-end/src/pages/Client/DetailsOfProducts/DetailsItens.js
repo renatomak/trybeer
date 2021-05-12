@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const DetailsItens = (props) => {
   const { salesDetails } = props;
-
+  console.log(salesDetails)
   const salesTotalPrice = salesDetails
     .reduce(
       (acc, { quantity, price }) => acc + (parseFloat(quantity) * parseFloat(price)), 0,
