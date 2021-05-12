@@ -29,7 +29,7 @@ const addSaleProd = async (saleId, productId, quantity) => {
     [saleId.insertId, productId, quantity]);
 };
 
-const getOrdersByUserId = async (userId) => {  
+const getOrdersByUserId = async (userId) => {
   const [pedidos] = await connection.execute('SELECT * FROM sales WHERE user_id = ? ORDER BY id;',
     [userId]);
   return pedidos;

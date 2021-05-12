@@ -4,6 +4,7 @@ import SideBar from '../../components/SideBar';
 import CardOrder from './CardOrder';
 import { TrybeerContext } from '../../../util';
 import { fetchGetOrders } from '../../../requests';
+import './style.css';
 
 const Ordens = (props) => {
   const { orders, setOrders } = useContext(TrybeerContext);
