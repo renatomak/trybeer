@@ -35,9 +35,19 @@ const getOrdersByUserId = async (userId) => {
   return pedidos;
 };
 
+const getOrders = async () => {
+  const [pedidos] = await connection.execute(`SELECT
+    id AS orderNum,
+    total_price AS orderValue,
+    delivery_address AS orderAddress,
+    delivery_number AS orderAddressNum, status FROM sales ORDER BY id;`);
+  return pedidos;
+};
+
 module.exports = {
   getProducts,
   addSale,
   addSaleProd,
   getOrdersByUserId,
+  getOrders,
 };

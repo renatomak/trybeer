@@ -117,6 +117,15 @@ url_image,
 user_id,
  */
 
+const fetchAdminOrders = () => {
+  const endpoint = 'http://localhost:3001/adminorders';
+  return fetch(
+    endpoint,
+  )
+    .then((response) => response.json())
+    .then((data) => data);
+};
+
 export {
   fetchLogin,
   fetchRegister,
@@ -124,4 +133,5 @@ export {
   fetchGetProducts,
   fetchCheckout,
   fetchGetOrders,
+  fetchAdminOrders,
 };

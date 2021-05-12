@@ -4,6 +4,7 @@ const {
   productsServices,
   checkoutServices,
   ordersServices,
+  admOrdersServices,
 } = require('../services/productsServices');
 
 const {
@@ -47,8 +48,17 @@ const {
   const orders = async (req, res) => {
     try {
       const { email } = req.body;
-      console.log(req.body, '   ', email);
       const pedidos = await ordersServices(email);      
+      res.status(OK_200).json(pedidos);
+    } catch (err) {
+      console.error(err.message);
+      res.status(UNAUTHORIZED_401).send({ message: internalError });    
+    }
+  };
+
+  const adminOrders = async (req, res) => {
+    try {
+      const pedidos = await admOrdersServices();
       res.status(OK_200).json(pedidos);
     } catch (err) {
       console.error(err.message);
@@ -61,4 +71,5 @@ const {
     images,
     checkout,
     orders,
+    adminOrders,
   };
