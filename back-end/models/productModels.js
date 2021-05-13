@@ -90,7 +90,7 @@ const getSaleProductsAdmin = async (id) => {
 };
 
 const updateOrderStatus = async (id) => {
-  const result = await connection.execute(
+  const [result] = await connection.execute(
     'UPDATE sales SET status = "Entregue" WHERE id = ?;', [id],
   );
   return result;

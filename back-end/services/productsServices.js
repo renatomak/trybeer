@@ -82,7 +82,10 @@ const admOrdersDetailsServices = async (id) => {
 
 const updateOrderStatusServices = async (id) => {
   const orderUpdated = await updateOrderStatus(id);
-  return orderUpdated;
+  if (orderUpdated.affectedRows > 0) {
+    return { message: 'Status do pedido atualizado com sucesso' };
+  }
+  return { message: 'Status do pedido não foi atualizado' };
 };
 
 module.exports = {

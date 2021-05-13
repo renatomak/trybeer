@@ -93,7 +93,7 @@ const {
 
   const delivered = async (req, res) => {
     try {
-      const id = req.body;
+      const { id } = req.body;
       const orderUpdated = await updateOrderStatusServices(id);
       res.status(OK_200).json(orderUpdated);
     } catch (err) {
