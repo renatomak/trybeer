@@ -8,6 +8,7 @@ const {
   saleProducts,
   adminOrders,
   adminOrdersDetails,
+  delivered,
 } = require('../controllers/productController');
 
 const router = express.Router();
@@ -22,5 +23,6 @@ router.post('/orders', orders);
 router.get('/orders/:id', saleProducts);
 router.get('/adminorders', adminOrders);
 router.get('/adminorders/:id', adminOrdersDetails);
+router.post('/delivered/', delivered);
 
 module.exports = router;
