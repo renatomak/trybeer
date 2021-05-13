@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Container } from './loginStyled';
+import { Button, Container, Input, Form } from './loginStyled';
 import { fetchLogin, fetchGetProducts } from '../../requests';
 import { TrybeerContext } from '../../util';
 
@@ -59,52 +59,44 @@ function Login(props) {
 
   return (
     <Container>
-      <form>
+      <Form>
         <span>Email</span>
-        <div className="input-group mb-3">
-          <div className="input-group-prepend">
-            <span className="input-group-text" id="basic-addon1">@</span>
-            <input
-              type="email"
-              name="email"
-              value={ email }
-              placeholder="user@trybe.com"
-              data-testid="email-input"
-              onChange={ (e) => handleChangeEmail(e) }
-            />
-          </div>
-        </div>
-        <div className="form-group">
-          <span>Senha</span>
-          <input
-            type="password"
-            name="password"
-            value={ password }
-            placeholder="password"
-            className="form-control"
-            data-testid="password-input"
-            onChange={ (e) => handleChangePassword(e) }
-          />
-        </div>
-        <button
+        <Input
+          type="text"
+          name="email"
+          value={ email }
+          placeholder="user@trybe.com"
+          data-testid="email-input"
+          onChange={ (e) => handleChangeEmail(e) }
+        />
+        <span>Senha</span>
+        <Input
+          type="password"
+          name="password"
+          value={ password }
+          placeholder="password"
+          data-testid="password-input"
+          onChange={ (e) => handleChangePassword(e) }
+        />
+        <Button
           type="button"
           data-testid="signin-btn"
-          className="btn btn-primary btn-lg btn-block"
+          className="btn btn-lg btn-block"
           value="Entrar"
           disabled={ buttonDisabled }
           onClick={ logged }
         >
           Entrar
-        </button>
+        </Button>
         <button
           type="button"
-          className="btn btn-outline-secondary btn-lg btn-block"
+          className="btn btn-secondary btn-lg btn-block"
           data-testid="no-account-btn"
           onClick={ register }
         >
           Ainda não tenho conta
         </button>
-      </form>
+      </Form>
     </Container>
   );
 }
