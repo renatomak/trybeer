@@ -18,6 +18,7 @@ const AdminOrders = (props) => {
 
   const getOrders = async () => {
     const adminOrders = await fetchAdminOrders();
+    console.log(adminOrders);
     setOrders(adminOrders);
   };
 
