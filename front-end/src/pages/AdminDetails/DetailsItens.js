@@ -1,41 +1,48 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { fetchChangeOrderStatus } from '../../requests';
+import { TrybeerContext } from '../../util';
+import AdminSideBar from '../components/AdminSideBar';
 
-const DetailsItens = (props) => {
-  const { adminSalesDetails } = props;
-  const salesTotalPrice = adminSalesDetails
-    .reduce(
-      (acc, { orderTotalValue }) => acc + (parseFloat(orderTotalValue)), 0,
-    );
+const DetailsItens = () => {
+  const { adminSalesDetails } = useContext(TrybeerContext);
+  const [status, setStatus] = useState('');
 
   const handleClick = async () => {
-    await fetchChangeOrderStatus();
+    const response = await fetchChangeOrderStatus(adminSalesDetails.orderNum);
+    if (response.message === 'Status do pedido atualizado com sucesso') {
+      setStatus('Entregue');
+    }
   };
+
+  useEffect(() => {
+    setStatus(adminSalesDetails.orderStatus);
+  }, []);
 
   return (
     <div>
+      <AdminSideBar title="TryBeer" />
       <div className="detailsContainer">
         <span
           data-testid="order-number"
         >
-          {`Pedido ${adminSalesDetails[0].orderNum}`}
+          {`Pedido ${adminSalesDetails.orderNum}`}
         </span>
-        <span data-testid="order-status">{`${adminSalesDetails[0].orderStatus}`}</span>
+        <span data-testid="order-status">{status}</span>
       </div>
       <div>
         <ul>
-          {adminSalesDetails.map(({ itens }, index) => (
+          {adminSalesDetails.itens.map((item, index) => (
             <li key={ index } className="detailsContainer">
-              <span data-testid={ `${index}-product-qtd` }>{itens.itenQuantity}</span>
+              <span data-testid={ `${index}-product-qtd` }>{item.itenQuantity}</span>
               <span data-testid={ `${index}-product-name` }>
-                {itens.itenName}
+                {item.itenName}
               </span>
               <span data-testid={ `${index}-order-unit-price` }>
-                {itens.itenPriceUn}
+                {`(R$ ${Number(item.itenPriceUn).toFixed(2).replace('.', ',')})`}
               </span>
               <span data-testid={ `${index}-product-total-value` }>
-                {`R$ ${itens.itenPriceTotal}`}
+                {`R$ ${Number(item.itenPriceTotal).toFixed(2).replace('.', ',')}`}
               </span>
             </li>
           ))}
@@ -43,15 +50,20 @@ const DetailsItens = (props) => {
       </div>
       <div>
         <span data-testid="order-total-value">
-          {`Total: R$ ${Number(salesTotalPrice).toFixed(2).replace('.', ',')}`}
+          {`Total: R$ ${
+            Number(adminSalesDetails.orderTotalValue).toFixed(2).replace('.', ',')
+          }`}
         </span>
-        <button
-          type="button"
-          data-testid="mark-as-delivered-btn"
-          onClick={ handleClick }
-        >
-          Marcar pedido como entregue
-        </button>
+        {status === 'Pendente'
+          ? (
+            <button
+              type="button"
+              data-testid="mark-as-delivered-btn"
+              onClick={ handleClick }
+            >
+              Marcar como entregue
+            </button>)
+          : <div />}
       </div>
     </div>
   );

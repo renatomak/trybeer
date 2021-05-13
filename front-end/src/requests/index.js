@@ -93,7 +93,16 @@ const fetchGetSalesProducts = (id) => {
     .then((data) => data);
 };
 
-const fetchAdminOrders = (id) => {
+const fetchAdminOrders = () => {
+  const endpoint = 'http://localhost:3001/adminorders';
+  return fetch(
+    endpoint,
+  )
+    .then((response) => response.json())
+    .then((data) => data);
+};
+
+const fetchAdminOrder = (id) => {
   const endpoint = `http://localhost:3001/adminorders/${id}`;
   return fetch(
     endpoint,
@@ -102,11 +111,16 @@ const fetchAdminOrders = (id) => {
     .then((data) => data);
 };
 
-const fetchChangeOrderStatus = () => {
-  // trocar endpoint
-  const endpoint = 'http://localhost:3001/adminorders/changestatus';
+const fetchChangeOrderStatus = (id) => {
+  const endpoint = 'http://localhost:3001/delivered';
+  const objId = { id };
   return fetch(
     endpoint,
+    {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(objId),
+    },
   )
     .then((response) => response.json())
     .then((data) => data);
@@ -122,4 +136,5 @@ export {
   fetchGetSalesProducts,
   fetchAdminOrders,
   fetchChangeOrderStatus,
+  fetchAdminOrder,
 };

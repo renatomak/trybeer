@@ -9,6 +9,7 @@ import AdminProfile from './pages/AdminProfile';
 import Details from './pages/Client/DetailsOfProducts';
 import Orders from './pages/Client/Ordens';
 import AdminOrders from './pages/AdminOrders';
+import DetailsItens from './pages/AdminDetails/DetailsItens';
 
 const Routes = () => (
   <main>
@@ -23,6 +24,7 @@ const Routes = () => (
       <Route exact path="/orders/:id_order" component={ Details } />
       <Route exact path="/orders" component={ Orders } />
       <Route exact path="/admin/orders" component={ AdminOrders } />
+      <Route exact path="/admin/orders/:id" component={ DetailsItens } />
     </Switch>
   </main>
 );
