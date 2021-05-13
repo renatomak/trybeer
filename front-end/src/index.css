@@ -1,0 +1,23 @@
+@font-face {
+  font-family: winnerSans;
+  src: url('./fonts/sportsfonts\ -\ Winner_Sans_Cond_Regular.otf');
+}
+
+:root {
+  --white: #fff;
+  --background:rgb(253, 188, 35);
+  --focus: #f5d104;
+  --dark-gray: #6d6e70;
+  --text: #666666;
+  --text-highlight: #B3B9FF;
+  --title: #2E384D;
+  --red: #E83F5B;
+  --dark-green: rgb(2, 107, 11);
+  --dark-green-tow: rgb(0, 139, 69);
+  --orange: #d37710;
+  --dark-orange: #d37710;
+  --blue: #5965E0;
+  --blue-dark: #4953B8;
+  --blue-twitter: #2AA9E0;
+  --height: 3.5rem;
+}

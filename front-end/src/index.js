@@ -1,14 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { createGlobalStyle } from 'styled-components';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from './util';
+import './index.css';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: var(--background);
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+  }
+`;
 
 ReactDOM.render(
   <Provider>
     <BrowserRouter>
       <React.StrictMode>
+        <GlobalStyle />
         <App />
       </React.StrictMode>
     </BrowserRouter>

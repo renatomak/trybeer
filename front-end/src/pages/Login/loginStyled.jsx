@@ -9,10 +9,51 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-export const Button = styled.input`
-  background-color: #6df76d;
-  height: 50px;
-  font-size: 30px;
+export const Button = styled.button`
+  background-color: var(--dark-green);
+  margin-top: 1.5rem;
+  font-family: winnerSans;
   font-weight: 700;
-  margin-top: 30px;
+  border-radius: 10px;
+  height: var(--height);
+`;
+export const Input = styled.input`
+  background-color: var(--dark-orange);
+  height: var(--height);
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  text-align: center;
+  font-size: 1.3rem;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  max-width: 300px;
+
+  span {
+    background-color: white;
+    border-radius: 5px 5px 0 0;
+    width: 40%;
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    font-weight: 700;
+    font-family: winnerSans;
+  }
+  input:focus {
+    background-color: var(--focus);
+    border: none;
+  }
+  /* Cor de fundo do autocomplete */
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px var(--focus) inset;
+    -webkit-text-fill-color: black !important;
+  }
+  button:active {
+    background-color: var(--dark-green);
+  }
 `;
