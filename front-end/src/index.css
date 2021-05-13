@@ -2,7 +2,9 @@
   font-family: winnerSans;
   src: url('./fonts/sportsfonts\ -\ Winner_Sans_Cond_Regular.otf');
 }
-
+/* body {
+  background-image: url('/images/chopp2.jpg');
+} */
 :root {
   --white: #fff;
   --background:rgb(253, 188, 35);
