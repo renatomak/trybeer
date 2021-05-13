@@ -89,6 +89,8 @@ const getSaleProductsAdmin = async (id) => {
   return itens;
 };
 
+const updateOrderStatus = async (id) => {};
+
 module.exports = {
   getProducts,
   addSale,
@@ -99,4 +101,5 @@ module.exports = {
   getSaleAdmin,
   getSaleProductsAdmin,
   findSale,
+  updateOrderStatus,
 };

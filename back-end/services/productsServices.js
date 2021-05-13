@@ -9,6 +9,7 @@ const {
   getSaleAdmin,
   getSaleProductsAdmin,
   findSale,
+  updateOrderStatus,
 } = require('../models/productModels');
 
 const { getByEmail } = require('../models/userModels');
@@ -79,6 +80,11 @@ const admOrdersDetailsServices = async (id) => {
   return {};
 };
 
+const updateOrderStatusServices = async (id) => {
+  const orderUpdated = await updateOrderStatus(id);
+  return orderUpdated;
+};
+
 module.exports = {
   productsServices,
   checkoutServices,
@@ -86,4 +92,5 @@ module.exports = {
   saleProductsServices,
   admOrdersServices,
   admOrdersDetailsServices,
+  updateOrderStatusServices,
 };

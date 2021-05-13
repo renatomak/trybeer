@@ -7,7 +7,7 @@ const {
   saleProductsServices,
   admOrdersServices,
   admOrdersDetailsServices,
-  updateOrderStatus,
+  updateOrderStatusServices,
 } = require('../services/productsServices');
 
 const {
@@ -94,7 +94,7 @@ const {
   const delivered = async (req, res) => {
     try {
       const id = req.body;
-      const orderUpdated = await updateOrderStatus(id);
+      const orderUpdated = await updateOrderStatusServices(id);
       res.status(OK_200).json(orderUpdated);
     } catch (err) {
       console.error(err.message);
