@@ -6,6 +6,8 @@ const {
   ordersServices,
   saleProductsServices,
   admOrdersServices,
+  admOrdersDetailsServices,
+  updateOrderStatusServices,
 } = require('../services/productsServices');
 
 const {
@@ -74,7 +76,29 @@ const {
       res.status(OK_200).json(pedidos);
     } catch (err) {
       console.error(err.message);
-      res.status(UNAUTHORIZED_401).send({ message: internalError });    
+      res.status(UNAUTHORIZED_401).send({ message: internalError });
+    }
+  };
+
+  const adminOrdersDetails = async (req, res) => {
+    try {
+      const orderId = req.params.id;
+      const orderDetails = await admOrdersDetailsServices(orderId);
+      res.status(OK_200).json(orderDetails);
+    } catch (err) {
+      console.error(err.message);
+      res.status(UNAUTHORIZED_401).send({ message: internalError });
+    }
+  };
+
+  const delivered = async (req, res) => {
+    try {
+      const { id } = req.body;
+      const orderUpdated = await updateOrderStatusServices(id);
+      res.status(OK_200).json(orderUpdated);
+    } catch (err) {
+      console.error(err.message);
+      res.status(UNAUTHORIZED_401).send({ message: internalError });
     }
   };
 
@@ -85,4 +109,6 @@ const {
     orders,
     saleProducts,
     adminOrders,
+    adminOrdersDetails,
+    delivered,
   };
