@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Container, Input, Form } from './Styled';
+import { Button, Container, Input, Form } from '../Styled';
 import { fetchLogin, fetchGetProducts } from '../../requests';
 import { TrybeerContext } from '../../util';
 

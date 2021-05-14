@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Login, Register } from './pages/LoginRegister';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import Products from './pages/Products';
 import Profile from './pages/Profile';
 import Checkout from './pages/Client/Checkout';

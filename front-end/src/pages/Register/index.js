@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { TrybeerContext } from '../../util';
 import { fetchRegister, fetchGetProducts } from '../../requests';
-import { Button, Container, Input, Form, Checkbox } from './Styled';
+import { Button, Container, Input, Form, Checkbox } from '../Styled';
 
 function Register(props) {
   const [name, setName] = useState('');
