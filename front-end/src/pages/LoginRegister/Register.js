@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { TrybeerContext } from '../../util';
 import { fetchRegister, fetchGetProducts } from '../../requests';
+import { Button, Container, Input, Form, Checkbox } from './Styled';
 
 function Register(props) {
   const [name, setName] = useState('');
@@ -72,9 +73,10 @@ function Register(props) {
   };
 
   return (
-    <form>
-      <label htmlFor="signup-name">
-        <input
+    <Container>
+      <Form>
+        <span>Nome</span>
+        <Input
           data-testid="signup-name"
           type="text"
           name="name"
@@ -82,10 +84,8 @@ function Register(props) {
           placeholder="nome"
           onChange={ (e) => handleChangeName(e) }
         />
-        Nome
-      </label>
-      <label htmlFor="signup-email">
-        <input
+        <span>Email</span>
+        <Input
           data-testid="signup-email"
           type="email"
           name="email"
@@ -93,11 +93,8 @@ function Register(props) {
           placeholder="user@trybe.com"
           onChange={ (e) => handleChangeEmail(e) }
         />
-        Email
-      </label>
-      <span>{ errorMessage }</span>
-      <label htmlFor="signup-password">
-        <input
+        <span>Senha</span>
+        <Input
           data-testid="signup-password"
           type="password"
           name="password"
@@ -105,27 +102,29 @@ function Register(props) {
           placeholder="senha"
           onChange={ (e) => handleChangePassword(e) }
         />
-        Senha
-      </label>
-      <label htmlFor="signup-seller">
-        <input
-          data-testid="signup-seller"
-          type="checkbox"
-          name="checkbox"
-          value="quero vender"
-          onChange={ handleChangeCheckbox }
-        />
-        Quero vender
-      </label>
-      <button
-        type="button"
-        data-testid="signup-btn"
-        disabled={ buttonDisabled }
-        onClick={ handleClick }
-      >
-        Cadastrar
-      </button>
-    </form>
+        <Checkbox>
+          <input
+            data-testid="signup-seller"
+            type="checkbox"
+            name="checkbox"
+            value="quero vender"
+            onChange={ handleChangeCheckbox }
+          />
+          <span>Quero vender</span>
+        </Checkbox>
+
+        <span>{ errorMessage }</span>
+        <Button
+          type="button"
+          data-testid="signup-btn"
+          className="btn btn-lg btn-block"
+          disabled={ buttonDisabled }
+          onClick={ handleClick }
+        >
+          Cadastrar
+        </Button>
+      </Form>
+    </Container>
   );
 }
 

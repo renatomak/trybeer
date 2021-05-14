@@ -57,3 +57,26 @@ export const Form = styled.form`
     background-color: var(--dark-green);
   }
 `;
+
+export const Checkbox = styled.div`
+  background-color: var(--white);
+  height: var(--height);
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  display: flex;
+  
+  input[type="checkbox"] {
+    width: 20%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  span {
+    width: 80%;
+    height: 100%;
+    margin: 0;
+    padding-top: 15px;
+    border-radius: 10px;
+  }
+`;
