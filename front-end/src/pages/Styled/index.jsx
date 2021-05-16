@@ -4,7 +4,7 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
@@ -55,5 +55,28 @@ export const Form = styled.form`
   }
   button:active {
     background-color: var(--dark-green);
+  }
+`;
+
+export const Checkbox = styled.div`
+  background-color: var(--white);
+  height: var(--height);
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  display: flex;
+  
+  input[type="checkbox"] {
+    width: 20%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  span {
+    width: 80%;
+    height: 100%;
+    margin: 0;
+    padding-top: 15px;
+    border-radius: 10px;
   }
 `;

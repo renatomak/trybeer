@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { fetchAdminOrder } from '../../requests';
+import { TrybeerContext } from '../../util';
 
 const Card = (props) => {
+  const { setAdminSalesDetails } = useContext(TrybeerContext);
   const { order, index } = props;
   const { orderNum, orderValue, orderAddress, orderAddressNum, status } = order;
 
-  const details = () => {
+  const details = async () => {
+    const detailsSales = await fetchAdminOrder(orderNum);
+    console.log(detailsSales);
+    setAdminSalesDetails(detailsSales);
     const { history } = props;
     history.push(`/admin/orders/${orderNum}`);
   };

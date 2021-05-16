@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { fetchUser } from '../../requests';
-import SideBar from '../components/SideBar';
+import SideBar from '../components/Header';
 
 function Profile(props) {
   const [name, setName] = useState('');

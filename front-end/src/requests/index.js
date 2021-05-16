@@ -102,6 +102,30 @@ const fetchAdminOrders = () => {
     .then((data) => data);
 };
 
+const fetchAdminOrder = (id) => {
+  const endpoint = `http://localhost:3001/adminorders/${id}`;
+  return fetch(
+    endpoint,
+  )
+    .then((response) => response.json())
+    .then((data) => data);
+};
+
+const fetchChangeOrderStatus = (id) => {
+  const endpoint = 'http://localhost:3001/delivered';
+  const objId = { id };
+  return fetch(
+    endpoint,
+    {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(objId),
+    },
+  )
+    .then((response) => response.json())
+    .then((data) => data);
+};
+
 export {
   fetchLogin,
   fetchRegister,
@@ -111,4 +135,6 @@ export {
   fetchGetOrders,
   fetchGetSalesProducts,
   fetchAdminOrders,
+  fetchChangeOrderStatus,
+  fetchAdminOrder,
 };

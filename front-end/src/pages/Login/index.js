@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Container, Input, Form } from './loginStyled';
+import { Button, Container, Input, Form } from '../Styled';
 import { fetchLogin, fetchGetProducts } from '../../requests';
 import { TrybeerContext } from '../../util';
+import Logo from '../components/Logo';
 
 function Login(props) {
   const [email, setEmail] = useState('');
@@ -59,6 +60,7 @@ function Login(props) {
 
   return (
     <Container>
+      <Logo />
       <Form>
         <span>Email</span>
         <Input

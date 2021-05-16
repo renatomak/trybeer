@@ -1,9 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { TrybeerContext } from '../../../util';
-import SideBar from '../../components/SideBar';
+import SideBar from '../../components/Header';
 import DetailsItens from './DetailsItens';
-import './Style.css';
 
 const Details = (props) => {
   const { salesDetails } = useContext(TrybeerContext);
