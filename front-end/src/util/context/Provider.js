@@ -10,6 +10,7 @@ function TrybeerProvider({ children }) {
   const [salesDetails, setSalesDetails] = useState([]);
   const [amount, setAmount] = useState(0);
   const [loggedInUser, setLoggedInUser] = useState(false);
+  const [adminSalesDetails, setAdminSalesDetails] = useState([]);
 
   useEffect(() => {
     if (products) {
@@ -37,7 +38,9 @@ function TrybeerProvider({ children }) {
     orders,
     setOrders,
     salesDetails,
-    setSalesDetails };
+    setSalesDetails,
+    adminSalesDetails,
+    setAdminSalesDetails };
 
   return (
     <TrybeerContext.Provider value={ context }>

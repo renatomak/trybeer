@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { Container } from './styled';
 import { TrybeerContext } from '../../util';
 import Card from './Card';
-import SideBar from '../components/SideBar';
+import SideBar from '../components/Header';
 
 const Products = (props) => {
   const { products, amount } = useContext(TrybeerContext);
