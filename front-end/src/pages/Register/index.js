@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { TrybeerContext } from '../../util';
 import { fetchRegister, fetchGetProducts } from '../../requests';
 import { Button, Container, Input, Form, Checkbox } from '../Styled';
+import Logo from '../components/Logo';
 
 function Register(props) {
   const [name, setName] = useState('');
@@ -74,6 +75,7 @@ function Register(props) {
 
   return (
     <Container>
+      <Logo />
       <Form>
         <span>Nome</span>
         <Input

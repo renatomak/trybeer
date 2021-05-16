@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import './styles.css';
+import { Header, NavContainer, Nav } from './Styled';
 
 const SideBar = ({ title }) => {
   const SIDE_MENU = 'side-menu-container';
@@ -25,49 +25,51 @@ const SideBar = ({ title }) => {
   };
   return (
     <div>
-      <header>
+      <Header>
         <h1 data-testid="top-title">{title}</h1>
         <button
           type="button"
-          className="btn containerHamburguer"
           data-testid="top-hamburguer"
           onClick={ handleClick }
         >
-          <div className="top-hamburguer">
+          <div>
             <i className="material-icons">dehaze</i>
           </div>
         </button>
-      </header>
-      <nav className={ classIsActive } style={ { display: `${visible}` } }>
-        <a
-          href="/products"
-          className="side-menu-item"
-          data-testid="side-menu-item-products"
-        >
-          Produtos
-        </a>
-        <a
-          href="/orders"
-          className="side-menu-item"
-          data-testid="side-menu-item-my-orders"
-        >
-          Meus Pedidos
-        </a>
-        <a
-          href="/profile"
-          className="side-menu-item"
-          data-testid="side-menu-item-my-profile"
-        >
-          Meu Perfil
-        </a>
-        <a
-          href="/login"
-          className="side-menu-item exit"
-          data-testid="side-menu-item-logout"
-        >
-          Sair
-        </a>
-      </nav>
+      </Header>
+      <NavContainer className={ classIsActive } style={ { display: `${visible}` } }>
+        <Nav>
+          <div id="NavTop">
+            <a
+              href="/products"
+              data-testid="side-menu-item-products"
+            >
+              Produtos
+            </a>
+            <a
+              href="/orders"
+              data-testid="side-menu-item-my-orders"
+            >
+              Meus Pedidos
+            </a>
+            <a
+              href="/profile"
+              data-testid="side-menu-item-my-profile"
+            >
+              Meu Perfil
+            </a>
+          </div>
+          <div id="NavBottom">
+            <a
+              href="/login"
+              className="exit"
+              data-testid="side-menu-item-logout"
+            >
+              Sair
+            </a>
+          </div>
+        </Nav>
+      </NavContainer>
     </div>
   );
 };
