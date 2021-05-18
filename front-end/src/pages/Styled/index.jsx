@@ -65,7 +65,7 @@ export const Form = styled.form`
 `;
 
 export const Checkbox = styled.div`
-  background-color: var(--white);
+  
   height: var(--height);
   width: 100%;
   border-radius: 10px;
@@ -79,10 +79,10 @@ export const Checkbox = styled.div`
   }
 
   span {
-    width: 80%;
     height: 100%;
     margin: 0;
-    padding-top: 15px;
+    padding-top: 5px;
     border-radius: 10px;
+    background-color: var(--light-orange);
   }
 `;
