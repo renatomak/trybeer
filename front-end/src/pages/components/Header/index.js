@@ -24,9 +24,10 @@ const SideBar = ({ title }) => {
     setVisible(exibir);
   };
   return (
-    <div>
+    <>
       <Header>
         <h1 data-testid="top-title">{title}</h1>
+        <img alt="logo" src="/images/buyBeer.png" width="130" />
         <button
           type="button"
           data-testid="top-hamburguer"
@@ -70,7 +71,7 @@ const SideBar = ({ title }) => {
           </div>
         </Nav>
       </NavContainer>
-    </div>
+    </>
   );
 };
 

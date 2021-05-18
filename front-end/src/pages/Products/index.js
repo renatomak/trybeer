@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
-import { Container } from './styled';
+import { Container, CartBtn, ProductsContainer } from './Styled';
 import { TrybeerContext } from '../../util';
 import Card from './Card';
-import SideBar from '../components/Header';
+import Header from '../components/Header';
 
 const Products = (props) => {
   const { products, amount } = useContext(TrybeerContext);
@@ -25,31 +25,32 @@ const Products = (props) => {
   userLogged();
 
   return (
-    <div>
-      <SideBar title="TryBeer" />
-      <Container>
-        {newProducts
-          .map((item, index) => (<Card
-            product={ item }
-            key={ item.id }
-            index={ index.toString() }
-          />))}
-      </Container>
-      <div>
-        <button
+    <>
+      <Header title="TryBeer" />
+      <ProductsContainer>
+        <Container>
+          {newProducts
+            .map((item, index) => (<Card
+              product={ item }
+              key={ item.id }
+              index={ index.toString() }
+            />))}
+        </Container>
+        <CartBtn
           type="button"
           data-testid="checkout-bottom-btn"
           value="Ver carrinho"
           onClick={ redirect }
           disabled={ totalValue === '0,00' }
         >
-          Ver Carrinho
-        </button>
-        <span data-testid="checkout-bottom-btn-value">
-          {` R$  ${totalValue}`}
-        </span>
-      </div>
-    </div>
+          <img alt="cart" src="/images/cart.png" />
+          <p>Ver Carrinho</p>
+          <span data-testid="checkout-bottom-btn-value">
+            {` R$  ${totalValue}`}
+          </span>
+        </CartBtn>
+      </ProductsContainer>
+    </>
   );
 };
 

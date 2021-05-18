@@ -60,7 +60,7 @@ function Login(props) {
 
   return (
     <Container>
-      <Logo />
+      <Logo width="50%" height="60%" />
       <Form>
         <span>Email</span>
         <Input
@@ -92,7 +92,7 @@ function Login(props) {
         </Button>
         <button
           type="button"
-          className="btn btn-secondary btn-lg btn-block"
+          className="register"
           data-testid="no-account-btn"
           onClick={ register }
         >

@@ -33,7 +33,7 @@ export const Header = styled.header`
   h1 {
     font-size: 1.5rem;
     letter-spacing: .3rem;
-    text-align: center;
+    text-align: justify;
     font-weight: 700;
     color: var(--white);
   }
@@ -59,7 +59,6 @@ export const Nav = styled.nav`
     flex-grow: 2;
     display: flex;
     flex-direction: column;
-    
   }
   #NavBottom {
     flex-grow: 1;

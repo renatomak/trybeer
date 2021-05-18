@@ -3,9 +3,7 @@ import { withRouter } from 'react-router-dom';
 import Routes from './router';
 
 const App = () => (
-  <div>
-    <Routes />
-  </div>
+  <Routes />
 );
 
 export default withRouter(App);
