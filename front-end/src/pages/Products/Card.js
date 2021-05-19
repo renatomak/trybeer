@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useContext, useEffect } from 'react';
 import { TrybeerContext } from '../../util';
-import { CardContainer, Price, CardImg, BtnContainer } from './styledCard';
+import { CardContainer, Price, DivImg, DivControlers, BtnContainer } from './Styled';
 
 const Card = (props) => {
   const { setProducts, products } = useContext(TrybeerContext);
@@ -27,36 +27,38 @@ const Card = (props) => {
 
   return (
     <CardContainer>
-      <Price data-testid={ `${index}-product-price` }>
-        <span>{`R$ ${price.replace('.', ',')}`}</span>
-      </Price>
-      <CardImg data-testid={ `${index}-product-img` }>
+      <DivImg data-testid={ `${index}-product-img` }>
         <img alt="card" src={ `/images/${name}.jpg` } />
-        <figcaption data-testid={ `${index}-product-name` }>{name}</figcaption>
-      </CardImg>
-      <BtnContainer>
-        <button
-          type="button"
-          className="btn"
-          data-testid={ `${index}-product-minus` }
-          name="minus"
-          onClick={ () => hadleChange('minus') }
-        >
-          -
-        </button>
-        <span data-testid={ `${index}-product-qtd` }>
-          { quantity }
-        </span>
-        <button
-          type="button"
-          className="btn"
-          data-testid={ `${index}-product-plus` }
-          name="plus"
-          onClick={ () => hadleChange('plus') }
-        >
-          +
-        </button>
-      </BtnContainer>
+      </DivImg>
+      <DivControlers>
+        <p data-testid={ `${index}-product-name` }>{name}</p>
+        <Price data-testid={ `${index}-product-price` }>
+          <span>{`R$ ${price.replace('.', ',')}`}</span>
+        </Price>
+        <BtnContainer>
+          <button
+            type="button"
+            className="btn"
+            data-testid={ `${index}-product-minus` }
+            name="minus"
+            onClick={ () => hadleChange('minus') }
+          >
+            <img alt="card" src="/images/arrow-minus.png" />
+          </button>
+          <span data-testid={ `${index}-product-qtd` }>
+            { quantity }
+          </span>
+          <button
+            type="button"
+            className="btn"
+            data-testid={ `${index}-product-plus` }
+            name="plus"
+            onClick={ () => hadleChange('plus') }
+          >
+            <img alt="card" src="/images/arrow-plus.png" />
+          </button>
+        </BtnContainer>
+      </DivControlers>
     </CardContainer>
   );
 };

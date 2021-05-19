@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  margin-top: 30px;
   display: flex;
+  max-width: 280px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -11,36 +11,35 @@ export const Container = styled.div`
 
 export const Button = styled.button`
   background-color: var(--dark-green);
-  margin-top: 1.5rem;
   font-family: winnerSans;
   font-weight: 700;
-  border-radius: 10px;
-  height: var(--height);
+  width: 60%;
 `;
 export const Input = styled.input`
   background-color: var(--dark-orange);
-  height: var(--height);
-  width: 100%;
-  border-radius: 10px;
   border: none;
   text-align: center;
-  font-size: 1.3rem;
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
-  max-width: 300px;
-
+  
+  button, input {
+    height: 45px;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+  button, span {
+    margin-top: 1.5rem;
+  }
   span {
     background-color: white;
     border-radius: 5px 5px 0 0;
     width: 40%;
     text-align: center;
     font-size: 1rem;
-    margin-top: 1.5rem;
     font-weight: 700;
     font-family: winnerSans;
   }
@@ -56,10 +55,17 @@ export const Form = styled.form`
   button:active {
     background-color: var(--dark-green);
   }
+  .register {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    background: none;
+    color: var(--white);
+  }
 `;
 
 export const Checkbox = styled.div`
-  background-color: var(--white);
+  
   height: var(--height);
   width: 100%;
   border-radius: 10px;
@@ -73,10 +79,10 @@ export const Checkbox = styled.div`
   }
 
   span {
-    width: 80%;
     height: 100%;
     margin: 0;
-    padding-top: 15px;
+    padding-top: 5px;
     border-radius: 10px;
+    background-color: var(--light-orange);
   }
 `;

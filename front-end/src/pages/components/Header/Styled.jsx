@@ -2,12 +2,16 @@ import styled from 'styled-components';
 
 export const Header = styled.header`
   height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: var(--background-header);
   border-bottom: 1px solid #494949;
-  display: flex;
   border-radius: 0 0 10px 10px;
-  justify-content: center;
   font-family: winnerSans;
+  position: -webkit-sticky; /* Necessário para funcionar no Safari */
+  position: sticky;
+  top: 0;
 
   button {
     border: none;
@@ -31,11 +35,12 @@ export const Header = styled.header`
     color: #fff;
   } 
   h1 {
-    font-size: 1.5rem;
+    font-size: 1rem;
     letter-spacing: .3rem;
-    text-align: center;
+    text-align: justify;
     font-weight: 700;
     color: var(--white);
+    margin-left: 70px;
   }
 `;
 
@@ -43,11 +48,13 @@ export const NavContainer = styled.div`
   width: 300px;
   min-height: calc(100vh - 121px);
   background-color: var(--navy-blue);
-  position: absolute;
   left: -300px;
   transition: .5s all;
   z-index: 1011;
   border-radius: 0 0 10px 0;
+  position: -webkit-sticky; /* Necessário para funcionar no Safari */
+  position: sticky;
+  top: 70px;
 `;
 
 export const Nav = styled.nav`
@@ -59,7 +66,6 @@ export const Nav = styled.nav`
     flex-grow: 2;
     display: flex;
     flex-direction: column;
-    
   }
   #NavBottom {
     flex-grow: 1;

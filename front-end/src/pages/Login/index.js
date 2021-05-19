@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Container, Input, Form } from '../Styled';
-import { fetchLogin, fetchGetProducts } from '../../requests';
 import { TrybeerContext } from '../../util';
 import Logo from '../components/Logo';
 
@@ -9,7 +8,7 @@ function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [buttonDisabled, setbuttonDisabled] = useState(true);
-  const { setProducts } = useContext(TrybeerContext);
+  const { setLocalUser, setLocalProducts } = useContext(TrybeerContext);
 
   const validatesEmail = () => {
     const emailRegex = /\S+@\S+\.\S+/;
@@ -36,18 +35,8 @@ function Login(props) {
 
   const logged = async () => {
     const { history } = props;
-    const user = await fetchLogin(email, password);
-    const LocalProducts = await fetchGetProducts().then((itens) => (
-      itens.map((item) => {
-        const newItem = { ...item, quantity: 0 };
-        return newItem;
-      })
-    ));
-    setProducts(LocalProducts);
-    console.log(LocalProducts);
-
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('products', JSON.stringify(LocalProducts));
+    const user = await setLocalUser(email, password);
+    await setLocalProducts();
 
     if (user.role === 'administrator') history.push('/admin/orders');
     if (user.role === 'client') history.push('/products');
@@ -60,7 +49,7 @@ function Login(props) {
 
   return (
     <Container>
-      <Logo />
+      <Logo width="50%" height="60%" />
       <Form>
         <span>Email</span>
         <Input
@@ -92,7 +81,7 @@ function Login(props) {
         </Button>
         <button
           type="button"
-          className="btn btn-secondary btn-lg btn-block"
+          className="register"
           data-testid="no-account-btn"
           onClick={ register }
         >

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Header, NavContainer, Nav } from './Styled';
+import Logo from '../Logo';
 
 const SideBar = ({ title }) => {
   const SIDE_MENU = 'side-menu-container';
@@ -24,9 +25,8 @@ const SideBar = ({ title }) => {
     setVisible(exibir);
   };
   return (
-    <div>
+    <>
       <Header>
-        <h1 data-testid="top-title">{title}</h1>
         <button
           type="button"
           data-testid="top-hamburguer"
@@ -36,6 +36,9 @@ const SideBar = ({ title }) => {
             <i className="material-icons">dehaze</i>
           </div>
         </button>
+        <div id="gost" />
+        <h1 data-testid="top-title">{title}</h1>
+        <Logo width="35%" height="90%" />
       </Header>
       <NavContainer className={ classIsActive } style={ { display: `${visible}` } }>
         <Nav>
@@ -70,7 +73,7 @@ const SideBar = ({ title }) => {
           </div>
         </Nav>
       </NavContainer>
-    </div>
+    </>
   );
 };
 

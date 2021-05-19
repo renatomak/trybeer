@@ -12,21 +12,19 @@ import AdminOrders from './pages/AdminOrders';
 import DetailsItens from './pages/AdminDetails/DetailsItens';
 
 const Routes = () => (
-  <main>
-    <Switch>
-      <Route exact path="/" component={ Login } />
-      <Route path="/login" component={ Login } />
-      <Route path="/products" component={ Products } />
-      <Route path="/register" component={ Register } />
-      <Route path="/profile" component={ Profile } />
-      <Route exact path="/checkout" component={ Checkout } />
-      <Route exact path="/admin/profile" component={ AdminProfile } />
-      <Route exact path="/orders/:id_order" component={ Details } />
-      <Route exact path="/orders" component={ Orders } />
-      <Route exact path="/admin/orders" component={ AdminOrders } />
-      <Route exact path="/admin/orders/:id" component={ DetailsItens } />
-    </Switch>
-  </main>
+  <Switch>
+    <Route exact path="/" component={ Login } />
+    <Route path="/login" component={ Login } />
+    <Route path="/products" component={ Products } />
+    <Route path="/register" component={ Register } />
+    <Route path="/profile" component={ Profile } />
+    <Route exact path="/checkout" component={ Checkout } />
+    <Route exact path="/admin/profile" component={ AdminProfile } />
+    <Route exact path="/orders/:id_order" component={ Details } />
+    <Route exact path="/orders" component={ Orders } />
+    <Route exact path="/admin/orders" component={ AdminOrders } />
+    <Route exact path="/admin/orders/:id" component={ DetailsItens } />
+  </Switch>
 );
 
 export default Routes;

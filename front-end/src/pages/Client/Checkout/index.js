@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { fetchCheckout } from '../../../requests';
 import SideBar from '../../components/Header';
+import { TrybeerContext } from '../../../util';
 
 function Checkout(props) {
   const [email, setEmail] = useState('');
@@ -10,6 +11,7 @@ function Checkout(props) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [itens, setItens] = useState([]);
   const [message, setMessage] = useState('');
+  const { setLocalProducts } = useContext(TrybeerContext);
 
   const getTotalPrice = () => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -61,9 +63,10 @@ function Checkout(props) {
     const requestReturn = await fetchCheckout(
       { email, totalPrice, deliveryAddress, deliveryNumber, itens },
     );
-    console.log(requestReturn);
+
     const timeout = 2000;
     if (requestReturn.message === 'Compra realizada com sucesso!') {
+      await setLocalProducts();
       setMessage('Compra realizada com sucesso!');
       setTimeout(deleteMessage, timeout);
     } else setMessage(requestReturn.message);

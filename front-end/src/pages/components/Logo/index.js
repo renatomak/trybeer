@@ -1,7 +1,9 @@
 import React from 'react';
 import logo from './buyBeer.png';
-import { Img } from './Styled';
 
-export default () => (
-  <Img src={ logo } alt="logo - BuyBeer" />
-);
+export default (props) => {
+  const { width, height } = props;
+  return (
+    <img src={ logo } alt="logo - BuyBeer" width={ width } height={ height } />
+  );
+};

@@ -75,7 +75,7 @@ function Register(props) {
 
   return (
     <Container>
-      <Logo />
+      <Logo width="50%" height="60%" />
       <Form>
         <span>Nome</span>
         <Input

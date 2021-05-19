@@ -12,9 +12,11 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: var(--background);
     font-family: Arial, sans-serif;
     font-size: 12px;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--light-orange);
   }
 `;
 
