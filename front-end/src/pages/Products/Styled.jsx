@@ -70,6 +70,7 @@ export const BtnContainer = styled.div`
   button {
     padding: 0;
     margin: 0;
+    background-color: var(--white);
   }
 `;
 export const CartBtn = styled.div`

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TrybeerContext from './TrybeerContext';
+import { fetchLogin, fetchGetProducts } from '../../requests';
 
 function TrybeerProvider({ children }) {
   const getCart = JSON.parse(localStorage.getItem('products'));
@@ -26,6 +27,23 @@ function TrybeerProvider({ children }) {
     }
   }, [products]);
 
+  const setLocalProducts = async () => {
+    const LocalProducts = await fetchGetProducts().then((itens) => (
+      itens.map((item) => {
+        const newItem = { ...item, quantity: 0 };
+        return newItem;
+      })
+    ));
+    setProducts(LocalProducts);
+    localStorage.setItem('products', JSON.stringify(LocalProducts));
+  };
+
+  const setLocalUser = async (email, password) => {
+    const user = await fetchLogin(email, password);
+    localStorage.setItem('user', JSON.stringify(user));
+    return user;
+  };
+
   const context = {
     products,
     amount,
@@ -40,7 +58,9 @@ function TrybeerProvider({ children }) {
     salesDetails,
     setSalesDetails,
     adminSalesDetails,
-    setAdminSalesDetails };
+    setAdminSalesDetails,
+    setLocalProducts,
+    setLocalUser };
 
   return (
     <TrybeerContext.Provider value={ context }>

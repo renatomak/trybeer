@@ -54,7 +54,7 @@ export const NavContainer = styled.div`
   border-radius: 0 0 10px 0;
   position: -webkit-sticky; /* Necessário para funcionar no Safari */
   position: sticky;
-  top: 0;
+  top: 70px;
 `;
 
 export const Nav = styled.nav`
