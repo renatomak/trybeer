@@ -9,6 +9,9 @@ export const Header = styled.header`
   border-bottom: 1px solid #494949;
   border-radius: 0 0 10px 10px;
   font-family: winnerSans;
+  position: -webkit-sticky; /* Necessário para funcionar no Safari */
+  position: sticky;
+  top: 0;
 
   button {
     border: none;
@@ -45,11 +48,13 @@ export const NavContainer = styled.div`
   width: 300px;
   min-height: calc(100vh - 121px);
   background-color: var(--navy-blue);
-  position: absolute;
   left: -300px;
   transition: .5s all;
   z-index: 1011;
   border-radius: 0 0 10px 0;
+  position: -webkit-sticky; /* Necessário para funcionar no Safari */
+  position: sticky;
+  top: 0;
 `;
 
 export const Nav = styled.nav`

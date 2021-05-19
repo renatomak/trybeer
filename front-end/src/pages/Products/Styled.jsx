@@ -37,8 +37,6 @@ export const DivControlers = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
-
-
   align-items: center;
   border-radius: 20px;
 
@@ -75,20 +73,24 @@ export const BtnContainer = styled.div`
   }
 `;
 export const CartBtn = styled.div`
-  width: 60%;
+  width: 80%;
   background-color: var(--dark-orange);
   border-radius: 10px;
   height: 50px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   outline: none;
   box-shadow: none;
+  position: -webkit-sticky; /* Necessário para funcionar no Safari */
+  position: sticky;
+  bottom: 0;
   
   span {
-    font-size: 1.8rem;
     color: var(--white);
     font-weight: 700;
     flex-grow: 1;
+    font-size: 1.5rem;
   }
   p {
     display: none;
