@@ -2,11 +2,12 @@ import styled from 'styled-components';
 
 export const Header = styled.header`
   height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: var(--background-header);
   border-bottom: 1px solid #494949;
-  display: flex;
   border-radius: 0 0 10px 10px;
-  justify-content: center;
   font-family: winnerSans;
 
   button {
@@ -31,11 +32,12 @@ export const Header = styled.header`
     color: #fff;
   } 
   h1 {
-    font-size: 1.5rem;
+    font-size: 1rem;
     letter-spacing: .3rem;
     text-align: justify;
     font-weight: 700;
     color: var(--white);
+    margin-left: 70px;
   }
 `;
 
