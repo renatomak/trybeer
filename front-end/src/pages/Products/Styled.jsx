@@ -73,7 +73,7 @@ export const BtnContainer = styled.div`
     background-color: var(--white);
   }
 `;
-export const CartBtn = styled.div`
+export const CartBtn = styled.button`
   width: 80%;
   background-color: var(--dark-orange);
   border-radius: 10px;

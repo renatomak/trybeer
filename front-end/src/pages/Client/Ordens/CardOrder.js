@@ -16,12 +16,11 @@ const CardOrder = (props) => {
   const details = async () => {
     const detailsSales = await fetchGetSalesProducts(id);
 
-    console.log('ID: ', id);
-    console.log('DetailsSales: ', detailsSales);
     setSalesDetails(detailsSales);
+    console.log('PROPS: ', props);
 
     const { history } = props;
-    history.push('/orders/1');
+    history.push(`/orders/${id}`);
   };
 
   return (
