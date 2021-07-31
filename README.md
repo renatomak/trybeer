@@ -5,6 +5,10 @@
 [![Issues][issues-shield]][issues-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
+<h1 align="center"> 
+	🚧  Projeto 🚀 Em construção...  🚧
+</h1>
+
 # Sobre o projeto
 
 O Trybeer - Buy & Beer é uma aplicação Full Stack Web e mobile construída para avaliar o aprendizado do Bloco de Backend do Curso de Desenvolvimento Web Full Stack da [Trybe](https://www.betrybe.com/ "Site da Trybe")
@@ -13,11 +17,9 @@ A aplicação é destinada para compras de bebidas. Possibilita também o acompa
 
 ## Layout
 ![Login](https://github.com/renatomak/trybeer/blob/master/assets/login.png)
-<!-- ![Mobile 1](https://github.com/acenelio/assets/raw/main/sds1/mobile1.png) ![Mobile 2](https://github.com/acenelio/assets/raw/main/sds1/mobile2.png)
-
-
-
-![Web 2](https://github.com/acenelio/assets/raw/main/sds1/web2.png) -->
+![Checkout](https://github.com/renatomak/trybeer/blob/master/assets/checkout.png)
+![Produtos](https://github.com/renatomak/trybeer/blob/master/assets/produtos.png)
+![Entregue](https://github.com/renatomak/trybeer/blob/master/assets/detalhes-pedido-entregue.png)
 
 ## Modelo inicial das Telas
 
