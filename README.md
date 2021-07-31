@@ -12,10 +12,10 @@ O Trybeer - Buy & Beer é uma aplicação Full Stack Web e mobile construída pa
 A aplicação é destinada para compras de bebidas. Possibilita também o acompanhamento dos pedidos por parte de um Administrador.
 
 ## Layout
-
+![Login](https://github.com/renatomak/trybeer/blob/master/assets/login.png)
 <!-- ![Mobile 1](https://github.com/acenelio/assets/raw/main/sds1/mobile1.png) ![Mobile 2](https://github.com/acenelio/assets/raw/main/sds1/mobile2.png)
 
-![Web 1](https://github.com/acenelio/assets/raw/main/sds1/web1.png)
+
 
 ![Web 2](https://github.com/acenelio/assets/raw/main/sds1/web2.png) -->
 
